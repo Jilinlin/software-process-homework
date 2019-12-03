@@ -1,0 +1,307 @@
+.smalltab{
+    width:100%;
+    height:50px;
+    line-height: 50px;
+    font-size: 25px;
+    color: black;
+    padding-left:5% ;
+    border-bottom: 1px solid #C12525;
+    margin-bottom: 20px;
+}
+
+/* 电费 */
+.dianfeititle{
+    height: 90px;
+    line-height: 90px;
+    margin-bottom: 20px;
+}
+.dianicon{
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    background:#C12525;
+    border-radius:28px ;
+    text-align: center;
+    float: left;
+    margin: 18px 4% 0 3%;
+}
+.dianfeispan{
+    font-size: 25px;
+    float: left;
+    color: black;
+}
+.dingweispan{
+    font-size: 22px;
+    float: right;
+    margin-right: 4%;
+    color: #C12525;
+}
+.dianfeibody{
+    height: 160px;
+}
+.dianfeitop{
+    width:93.3%;
+    height: 80px;
+    line-height: 80px;
+    margin:0 auto;
+    border-bottom: 1px solid #a7a7a7;
+}
+.dianfeibottom{
+    width:93.3%;
+    height: 80px;
+    line-height: 80px;
+    margin:0 auto;
+}
+.bodyspan{
+    font-size: 20px;
+    margin:0 3% 0 0;
+    color: black;
+}
+.bodyinput{
+    border: none;
+    width:70%;
+    height: 50px;
+    font-size: 22px;
+}
+.button{
+    height: 100px;
+    width:80%;
+    margin-left: 17%;
+}
+.thebutton{
+    margin-top: 50px;
+    height: 50px;
+    width: 80%;
+    border: none;
+    color: white;
+    background: #C12525;
+    font-size: 22px;
+    border-radius: 5px;
+}
+/* 电费下一步 */
+.diannexttitle{
+    height: 90px;
+    line-height: 90px;
+    width: 96%;
+    border-bottom: 1px solid #a7a7a7;
+    margin:0 auto;
+}
+.nextcontent{
+    height: 300px;
+    width: 96%;
+    border-bottom: 1px solid #a7a7a7;
+    margin:0 auto;
+    color: #6e6e6e;
+}
+.nextli{
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+}
+.lileft{
+    float: left;
+}
+.liright{
+    float: right;
+}
+.nextchong{
+    height: 160px;
+}
+.nextchongzhi{
+    width:96%;
+    height: 80px;
+    line-height: 80px;
+    margin:0 auto;
+}
+.nextspan{
+    font-size: 25px;
+    margin:0 5.3% 0 0;
+    color: black;
+}
+.nextinput{
+    border: none;
+    width:59%;
+    height: 50px;
+    font-size: 20px;
+}
+.nextbutton{
+    height: 80px;
+    width:100%;
+    /* margin:0 auto; */
+    background: #F4F3F3;
+    text-align: center;
+}
+.nextthebutton{
+    margin-top: 8%;
+    height: 50px;
+    width: 80%;
+    border: none;
+    color: white;
+    background: #C12525;
+    font-size: 22px;
+}
+/* 水费 */
+.snextcontent{
+    height: 250px;
+    width: 96%;
+    border-bottom: 1px solid #a7a7a7;
+    margin:0 auto;
+    
+}
+/* 供暖费 */
+.gnextcontent{
+    height: 150px;
+    width: 96%;
+    border-bottom: 1px solid #a7a7a7;
+    margin:0 auto;
+    
+}
+.gongspan{
+    float: right;
+    font-size: 30px;
+    color: black;
+}
+/* 燃气费 */
+
+/* 支付 */
+.out{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+}
+.pay_touxiang{
+    width:113px;
+    height: 113px;
+    border: 2px solid #fff ;
+    margin:0 auto;
+}
+.pay_touxiang img{
+    width:100%;
+    height: 100%;
+}
+.telnum{
+    color: #fff;
+    text-align: center;
+    font-size: 25px;
+}
+.payjine{
+    width: 100%;
+    height: 40%;
+    border-bottom: 1px solid #cac9c9;
+    margin-bottom: 3%;
+}
+.jinetop{
+    height: 50%;
+    text-align: center;
+    padding-top:5% ;
+    color: #000;
+}
+.jinemiddle{
+    height: 25%;
+    padding:2% 2% 0 2%;
+}
+.jinebottom{
+    height: 25%;
+    padding:2% 2% 0 2%;
+}
+.paybank{
+    width: 100%;
+    height: 10%;
+    padding:0 2% 0 2%;
+}
+.bank_left{
+    color: #8A8A8A;
+    font-size: 22px;
+}
+.bank_right{
+    color: #000;
+    font-size: 22px;
+    float: right;
+}
+.yes{
+    background: #0190FB;
+    border: none;
+    position: absolute;
+    bottom: 1%;
+    left: 4%;
+    width:92%;
+    height: 7%;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 5px;
+}
+/* 密码 */
+.yanzheng{
+    width:100%;
+    height: 100%;
+}
+.pwd{
+    width:100%;
+    height: 11%;
+    margin-top: 5%;
+}
+.pwdul{
+    width:90%;
+    height: 100%;
+    margin:0 auto;
+    border: 1px solid #cac9c9;
+    border-radius: 5px;
+}
+.pwdul li{
+    width:16.6%;
+    height: 100%;
+    border-right: 1px solid #cac9c9;
+    float: left;
+    padding-left: 5%;
+}
+.pwdul li:last-child{
+    border-right: none;
+}
+.pwdul li input{
+    width:50%;
+    height: 100%;
+    border:none;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+}
+.forget{
+    width: 100%;
+    text-align: center;
+    color: #0190FB;
+    font-size: 17px;
+    margin-top: 5%;
+}
+/* 支付成功 */
+.success{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    padding-top:5%;
+}
+.success1{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    padding-top:5%;
+    display: none;
+}
+.successword{
+    font-size: 25px;
+    color: black;
+}
+.failure{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    padding-top:5%;
+}
+.failure1{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    padding-top:5%;
+    display: none;
+}

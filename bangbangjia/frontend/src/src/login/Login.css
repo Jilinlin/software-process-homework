@@ -1,0 +1,89 @@
+@import '~antd/dist/antd.css';
+
+*{
+  padding:0;
+  margin:0;
+}
+ul,li{
+  list-style:none;
+}
+.third_login{
+    width:'100%';
+    height:'60';
+    margin-top:'20';
+    background-color:red;
+    float:'left'
+}
+.agree{
+    width:100%;
+    height:100px;
+}
+.agree-p1{
+    float: left;
+    margin-top: 40px;
+}
+.agree-p2{
+    float: left;
+    margin-top: 40px;
+    color: brown;
+}
+
+/* 输入手机号页面 */
+.content{
+    width:100%;
+    height:50px;
+    background-color:white;
+    
+}
+.content1{
+   float: left;
+   margin-left: 10%;
+   font-size: 25;
+   line-height: 50px;
+   color: brown;
+}
+.content2{
+   float: left;
+   font-size: 25;
+   line-height: 50px;
+}
+
+/* 输入验证码 */
+.content3{
+    float: left;
+    margin-left: 10%;
+    font-size: 25;
+    line-height: 50px;
+ }
+ .content4{
+    float: left;
+    font-size: 25;
+    line-height: 50px;
+    color: brown;
+ }
+
+.content5{
+    float: left;
+    font-size: 25;
+    line-height: 50px;
+ }
+ .yanzhengma{
+     width: 100%;
+     height:40px;
+     float: left;
+     font-weight: bold;
+     margin-left: 5%;
+ }
+
+ /* 设置密码 */
+ .setpw{
+     width: 100%;
+     height:100px;
+ }
+ .setpw1{
+     width:90%;
+     height:40px;
+     margin-left: 5%;
+     font-size: 16px;
+     margin-top: 20px;
+ }
