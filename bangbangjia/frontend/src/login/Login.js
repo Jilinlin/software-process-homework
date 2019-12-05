@@ -31,7 +31,7 @@ export default class Login extends Component {
             return  <Redirect to="/shouye"/>
          }
         return (
-            <div style={{width:'100%',height:'100%',backgroundColor:'#F4F3F3'}}>
+            <div style={{width:'100%',height:'812px',backgroundColor:'#F4F3F3'}}>
                   <NavBar
                        style={{backgroundColor:'#eee',color:'black',fontSize:22}}
                    >XX登录
@@ -45,8 +45,8 @@ export default class Login extends Component {
                      <button style={ {color: 'white',fontSize: 25,backgroundColor:'#b34449',border:'0',width:'90%',height:'50px',marginLeft:'5%',marginTop:'20px'} } value='登录' type='submit' onClick={this.doLogin} >登录 </button> 
                  </form>
                  <div style={{width:'90%',height:'60px',marginLeft:'5%'}}>
-                     <a href='http://localhost:3000/#/register'style={{float:'left',fontSize:'15px',width:'100px',height:'60px',paddingTop:'30px',fontWeight:'bold'}} >手机快速注册</a>
-                     <a href='http://localhost:3000/#/forgetpw' style={{float:'right',fontSize:'15px',width:'100px',height:'60px',paddingTop:'30px',fontWeight:'bold'}}>忘记密码</a>
+                     <Link to='/register'style={{float:'left',fontSize:'15px',width:'100px',height:'60px',paddingTop:'30px',fontWeight:'bold'}} >手机快速注册</Link>
+                     <Link to='/forgetpw' style={{float:'right',fontSize:'15px',width:'100px',height:'60px',paddingTop:'30px',fontWeight:'bold'}}>忘记密码</Link>
                 </div>
                 <div style={{width:'100%',height:80}}>
                         <div style={{borderTop:'1px solid',width:'38%',marginTop:'50px',float:'left'}}></div>
