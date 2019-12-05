@@ -36,7 +36,7 @@ export default class Mine extends Component {
             return  <Redirect to="/shouye"/>
          }
         return (
-            <div className="Gall">
+            <div className="Gall" style={{height:"812px",background:"#F4F3F3"}}>
                 <NavBar
                     mode="light"
                     onLeftClick={this.mine}

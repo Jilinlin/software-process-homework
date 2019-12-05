@@ -36,7 +36,7 @@ export default class Mine extends Component {
 
 
         return (
-            <div>
+            <div style={{height:"812px",background:"#fff"}}>
                 <NavBar
                     mode="light"
                     style={{background:"#f2f2f2",height:"60px",lineHeight:"60px"}}

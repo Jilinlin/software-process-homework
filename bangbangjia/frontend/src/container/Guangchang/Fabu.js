@@ -50,7 +50,7 @@ export default class Fabu extends Component {
             return <Guangchang value={this.state.inputValue} />
          }
         return (
-            <div className="Fall">
+            <div className="Fall" style={{height:"812px",background:"#F4F3F3"}}>
                 <NavBar
                     mode="light"
                     onLeftClick={this.fabu}

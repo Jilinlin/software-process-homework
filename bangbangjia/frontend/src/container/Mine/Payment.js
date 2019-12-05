@@ -23,7 +23,7 @@ export default class Payment extends Component {
             return <Redirect to="/shouye" />
         }
         return (
-            <div>
+            <div style={{height:"812px",background:"#fff"}}>
                 <div className="bigbox">
                     {/* 导航栏 */}
                     <NavBar

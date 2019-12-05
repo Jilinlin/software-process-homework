@@ -71,7 +71,7 @@ export default class User extends Component {
             return <Redirect to="/usernumber" />
         }
         return (
-            <div>
+            <div style={{height:"812px",background:"#fff"}}>
                 {/* 导航栏 */}
                 <NavBar
                     mode="light"

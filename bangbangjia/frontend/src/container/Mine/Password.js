@@ -21,7 +21,7 @@ export default class Password extends Component {
             return <Redirect to="/setting" />
         }
         return (
-            <div>
+            <div style={{height:"812px",background:"#f4f3f3"}}>
                 {/* 导航栏 */}
                 <NavBar
                     mode="light"

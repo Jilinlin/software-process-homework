@@ -53,7 +53,7 @@ export default class Setting extends Component {
             return <Redirect to="/" />
         }
         return (
-            <div>
+            <div style={{height:"812px",background:"#fff"}}>
                 <div className="bigbox1">
                     <NavBar
                         mode="light"
