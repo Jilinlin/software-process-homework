@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "./static/css/main.6587598a.chunk.css",
+    "main.js": "./static/js/main.783366ab.chunk.js",
+    "main.js.map": "./static/js/main.783366ab.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.b18ba796.js",
+    "runtime-main.js.map": "./static/js/runtime-main.b18ba796.js.map",
+    "static/css/2.a3a5dca9.chunk.css": "./static/css/2.a3a5dca9.chunk.css",
+    "static/js/2.a79a3e84.chunk.js": "./static/js/2.a79a3e84.chunk.js",
+    "static/js/2.a79a3e84.chunk.js.map": "./static/js/2.a79a3e84.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.ce4b749e5566e04e4b06f6bb318a5234.js": "./precache-manifest.ce4b749e5566e04e4b06f6bb318a5234.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.a3a5dca9.chunk.css.map": "./static/css/2.a3a5dca9.chunk.css.map",
+    "static/css/main.6587598a.chunk.css.map": "./static/css/main.6587598a.chunk.css.map",
+    "static/media/login_touxiang.jpg": "./static/media/login_touxiang.6e7f665e.jpg",
+    "static/media/new1.jpg": "./static/media/new1.2a103fb3.jpg",
+    "static/media/touxiang.jpg": "./static/media/touxiang.6e7f665e.jpg",
+    "static/media/touxiang1.jpg": "./static/media/touxiang1.4fa9479c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b18ba796.js",
+    "static/css/2.a3a5dca9.chunk.css",
+    "static/js/2.a79a3e84.chunk.js",
+    "static/css/main.6587598a.chunk.css",
+    "static/js/main.783366ab.chunk.js"
+  ]
+}

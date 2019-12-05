@@ -1,0 +1,293 @@
+@import '~antd/dist/antd.css';
+
+*{
+  padding:0;
+  margin:0;
+}
+ul,li,button{
+  list-style:none;
+}
+a{
+  text-decoration: none;
+  color:black;
+}
+
+body{
+  background-color: #d7d6d6;
+}
+
+
+.flex-container {
+  margin: 0 15px;
+}
+.flex-container .inline {
+  width: 80px!important;
+  margin: 9px 9px 9px 0;
+}
+
+.sub-title {
+  color: #888;
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+}
+.placeholder {
+  background-color: #ebebef;
+  color: #bbb;
+  text-align: center;
+  line-height: 30px;
+  width: 100%;
+}
+/* 底 */
+.all{
+  width:860px;
+  height:675px;
+  background-color:white;
+  margin:auto;
+}
+.heade{
+  width:860px;
+  height:50px;
+  color:black;
+}
+.bang{
+  padding-top:5px;
+  padding-left:50px;
+  float:left;
+  background-color:rgb(205,206,253);
+  width:600px;
+  height:50px;
+  font-size:22px;
+  font-weight:bold;
+}
+.headeRight{
+  float:right;
+  background-color:rgb(138,139,200);
+  width:260px;
+  height:50px;
+  padding-left:90px;
+  padding-top:13px;
+  font-weight:bold;
+  font-size:12;
+}
+.left{
+  width:200px;
+  height:625px;
+  color:black;
+  float:left;
+  background-color:rgb(235,236,253);
+}
+.left li{
+  height:40px;
+  margin-top:10px;
+  margin-Left:20px;
+}
+.exit{
+  border-top:1px solid rgb(199,199,204);
+}
+.content{
+  /* background-color: antiquewhite; */
+  width:660px;
+  height:625px;
+  float:right;
+}
+/* 底完成 */
+
+/* 业主管理开始 */
+.yzheade{
+  width:660px;
+  height:75px;
+  border-bottom:2px solid rgb(238,238,238) ;
+}
+.yzheade p{
+  float:left;
+  font-size:18px;
+  margin:25px 0 0 28px;
+  color:black;
+}
+.yzcontent{
+  height:45px;
+  border-bottom:1px solid rgb(238,238,238) ;
+}
+.ul0{
+  margin-left:22px;
+}
+.ul0 li{
+  float:left;
+  width:75px;
+  margin-left:10px;
+  margin-top:8px;
+  font-size:12px;
+  text-align: center;
+}
+.yzcon{
+  /* background-color:green; */
+  height:360px;
+}
+.ul1 li{
+  /* background-color:rebeccapurple; */
+  height:55px;
+  margin-top:5px;
+
+}
+.ul1{
+  margin-left:22px;
+}
+.ul2 li{
+  float:left;
+  margin-left:10px;
+  width:75px;
+  text-align: center;
+  font-size:10px;
+  line-height:50px;
+}
+.ul2 button{
+  width:60px;
+  height:25px;
+  background-color:white;
+  border:1px solid rgb(214,214,214);
+  border-radius:3px;
+}
+.ul2 button:hover{
+  background-color:rgb(237,96,101);
+}
+.numb li{
+  float:left;
+  margin-left:10px;
+  width:20px;
+  height:20px;
+  border-radius: 2px;
+  text-align: center;
+}
+.numb{
+  margin:0 auto;
+  width:230px;
+  height:20px;
+}
+.numb li:hover{
+  background-color: rgb(103,189,243);
+}
+.Gul0{
+  margin-left:22px;
+}
+.Gul0 li{
+  float:left;
+  width:75px;
+  margin-left:10px;
+  margin-top:8px;
+  font-size:12px;
+  text-align: center;
+}
+.Gul2 li{
+  /* background-color: greenyellow; */
+  float:left;
+  margin-left:10px;
+  width:75px;
+  text-align: center;
+  font-size:10px;
+  line-height:50px;
+}
+.Gul2 button{
+  width:60px;
+  height:25px;
+  background-color:white;
+  border:1px solid rgb(214,214,214);
+  border-radius:3px;
+}
+.Gul2 button:hover{
+  background-color:rgb(237,96,101);
+}
+.yzheade button{
+  width:115px;
+  height:45px;
+  float:right;
+  background-color:rgb(103,189,243);
+  border:0;
+  border-radius:5%;
+  margin:15px 50px 0 0;
+  font-size:12px;
+}
+
+
+/* guanli */
+.manage{
+  width: 50px;
+  height: 120px;
+  float: left;
+  background-color: rgb(250,250,250);
+}
+
+.manage img{
+ margin-left: 10px;
+ margin-top: 10px;
+ width: 30px;
+ height:30px;
+ border-radius: 15px;
+ border: 1px solid gray;
+ float: left;
+}
+
+.manage1{
+ width: 200px;
+ height: 120px;
+ float: left;
+ background-color: rgb(250,250,250);
+}
+
+.manage2{
+ width: 200px;
+ height: 90px;
+ float: left;
+ border-bottom: 2px solid rgb(195,195,195);
+}
+
+.manage3{
+ width: 200px;
+ height: 30px;
+ float: left;
+}
+
+/* tianjia */
+.tianjia{
+ width:660px;
+ height:130px;
+}
+.tianjia1{
+ width:660px;
+ height:300px;
+}
+.tianjia1 div{
+ float: left;
+ width:660px;
+ height:40px;
+ margin-top: 20px;
+}
+.tianjia1 div p{
+ float: left;
+}
+.tianjia1 div  button{
+ float: left;
+}
+.tianjia3{
+ width: 130px;
+ height:30px;
+ background-color: rgb(87, 164, 228);
+ border: 0;
+ margin-left: 250px;
+ border-radius: 5px;
+ margin-top: 30px;
+}
+
+/* show页面 */
+.show{
+ width:660px;
+ height:160px;
+}
+.show1{
+ width: 660px;
+ height:50px;
+ float: left;
+ margin-left: 220px;
+ margin-top:10px ;
+ font-weight: bold;
+ font-size: 18px;
+}
