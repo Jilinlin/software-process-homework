@@ -81,7 +81,7 @@ export default class Home extends Component {
             return <Redirect to='/findtraffic'/>    
         }
         return (
-            <div>
+            <div style={{height:"100%",background:"#F4F3F3"}}>
                 {/* 一、导航栏 */}
                 <NavBar mode="light" style={{height:60}}>
                     <div style={{fontSize:22}}>帮帮家</div>

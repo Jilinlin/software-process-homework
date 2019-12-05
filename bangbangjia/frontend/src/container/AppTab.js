@@ -10,7 +10,7 @@ export default class AppTab extends React.Component {
     super(props);
     this.state = {
       selectedTab: 'home',//默认进入首页
-      // selectedTab: 'nearby',//默认进入附近
+      // selectedTab: 'greenTab',//默认进入广场
       // selectedTab: 'my',//默认进入我的
     };
   }

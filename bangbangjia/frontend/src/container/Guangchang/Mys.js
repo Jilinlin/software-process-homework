@@ -38,11 +38,13 @@ export default class Mine extends Component {
         return (
             <div className="Gall">
                 <NavBar
-                mode="light"
-                icon={<Icon type="left" style={{color:"black"}} />}
-                onLeftClick={this.mine}
-                style={{backgroundColor:"#f2f2f2",height:"40px",width:"100%"}}
-                >我的</NavBar>
+                    mode="light"
+                    onLeftClick={this.mine}
+                    icon={<Icon type="left" style={{color:"black"}} />}
+                    style={{background:"#f2f2f2",height:"60px",lineHeight:"60px"}}
+                >
+                    <span style={{fontSize:"22px"}}>我的</span>
+                </NavBar>
                 <ul className="kuang">
                     {
                         data.map((item,idx)=>{

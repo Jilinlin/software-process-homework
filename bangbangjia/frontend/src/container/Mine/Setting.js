@@ -10,7 +10,8 @@ export default class Setting extends Component {
         this.state={
             mine:false,
             user:false,
-            password:false
+            password:false,
+            back:false
         }
     }
 
@@ -32,15 +33,24 @@ export default class Setting extends Component {
             password:true
         })
     }
+    goback=(e)=>{
+        e.preventDefault();
+        this.setState({
+            back:true
+        })
+    }
     render() {
         if(this.state.mine){
-            return <Redirect to="/" />
+            return <Redirect to="/mine" />
         }
         else if(this.state.user){
             return <Redirect to="/user" />
         }
         else if(this.state.password){
             return <Redirect to="/password" />
+        }
+        else if(this.state.back){
+            return <Redirect to="/" />
         }
         return (
             <div>
@@ -73,7 +83,7 @@ export default class Setting extends Component {
                     </div>
 
                     {/* 退出登录 */}
-                    <Button onClick={this.mine} className="set-button" type="warning">退出登录</Button><WhiteSpace />
+                    <Button onClick={this.goback} className="set-button" type="warning">退出登录</Button><WhiteSpace />
                 </div>
             </div>
         )

@@ -39,7 +39,11 @@ export default class Fabu extends Component {
     render() {
         const { files } = this.state;
         if(this.state.back){
+            // console.log(this.state.selectedTab);
             return <Redirect to="/shouye"/>
+            // return <Redirect to="/guangchang"/>
+
+
          }
          if(this.state.sub){
             console.log(this.state.inputValue);
@@ -49,10 +53,12 @@ export default class Fabu extends Component {
             <div className="Fall">
                 <NavBar
                     mode="light"
-                    icon={<Icon type="left" style={{color:"black"}} />}
                     onLeftClick={this.fabu}
-                    style={{backgroundColor:"#f2f2f2",height:"40px"}}
-                >动态</NavBar>
+                    icon={<Icon type="left" style={{color:"black"}} />}
+                    style={{background:"#f2f2f2",height:"60px",lineHeight:"60px"}}
+                >
+                    <span style={{fontSize:"22px"}}>动态</span>
+                </NavBar>
                 <form >
                     <div className="fabu">
                         <input placeholder="发布一下心情吧" onChange={this.handleChange} type="text"/>

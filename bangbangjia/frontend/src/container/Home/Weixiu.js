@@ -70,7 +70,7 @@ const row = (rowData, sectionID, rowID) => {
     }
     const obj = data1[index--];
     return (
-      <div key={rowID} style={{ padding: '0 15px' ,width:'100%'}}>
+      <div key={rowID} style={{ padding: '0 15px' }}>
 
         <div style={{ display: '-webkit-box', display: 'flex', padding: '15px 0' }}>
 
@@ -84,7 +84,7 @@ const row = (rowData, sectionID, rowID) => {
             <div style={{ }}>
                 <div style={{color:'#edb108',position:'absolute',left:'70%'}}>{obj.des3}</div>
                 <br/>
-                <div style={{width:360,position:'absolute',left:'55%'}}>{obj.des4}</div>
+                <div style={{width:150,position:'absolute',left:'55%'}}>{obj.des4}</div>
                 <br/>
                 <div style={{position:'absolute',left:'55%'}}>{obj.des5}</div>
             </div>
