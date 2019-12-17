@@ -1,37 +1,106 @@
 import React, { Component } from 'react'
 
-const data=[
-    {
-        trueName:'珍妮',
-        tel:13611112222,
-        content:'7号楼4单元301室地暖坏了',
-        worker:'王师傅 13611112222'
-    },
-    {
-        trueName:'丹尼',
-        tel:15033334444,
-        content:'3号楼3单元402室水龙头崩了',
-        worker:'王师傅 13611112222'
-    },
-    {
-        trueName:'韩梅梅',
-        tel:18755555666,
-        content:'5号楼2单元202室下水道堵了',
-        worker:'王师傅 13611112222'
-    }
-]
 export default class Yezhu extends Component {
     constructor(props){
         super(props);
         this.state={
-            data:data
+            data:[],
+            num:[1,2,3,4,5]
         }
     }
-    del(idx){
+    del(idx,rno){
         let data =[...this.state.data];
         data.splice(idx,1);
         this.setState({
             data
+        })
+        fetch("http://localhost:4000/backweixiu_del",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"rno":rno})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            console.log(res);
+        })
+    }
+    componentWillMount(){
+        fetch("http://localhost:4000/backweixiu",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":1})
+        })
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                data:res
+            })
+        })
+    }
+    Page=(page)=>{
+        fetch("http://localhost:4000/backweixiu",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":page})
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+                data:res
+            })
+        })
+    }
+
+    changesel=(e,rno)=>{
+        let fixsel=e.target.value;
+        // console.log(fixsel,rno);
+        fetch("http://localhost:4000/backweixiu_fenpei",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"fixsel":fixsel,"rno":rno})
+        })
+        .then(res=>res.text())
+        .then(res=>{
+            console.log(res);
+            if(res=="update success"){
+                alert("修改成功");
+            }else{
+                alert("修改失败");
+            }
+        })
+    }
+    changesel2=(e,rno)=>{
+        let fixsel=e.target.value;
+        // console.log(fixsel,rno);
+        fetch("http://localhost:4000/backweixiu_jiejue",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"fixsel":fixsel,"rno":rno})
+        })
+        .then(res=>res.text())
+        .then(res=>{
+            console.log(res);
+            if(res=="update success"){
+                alert("修改成功");
+            }else{
+                alert("修改失败");
+            }
         })
     }
     render() {
@@ -60,30 +129,41 @@ export default class Yezhu extends Component {
                             this.state.data.map((item,idx)=>{
                                 return <li key={idx}>
                                     <ul className="ul2">
-                                        <li style={{marginLeft:-12}}>{item.trueName}</li>
-                                        <li style={{marginLeft:-5}}>{item.tel}</li>
-                                        <li style={{lineHeight:2,width:'90px',marginLeft:'32px'}}>{item.content}</li>
+                                        <li style={{marginLeft:-12}}>{item.name}</li>
+                                        <li style={{marginLeft:-5}}>{item.uphone}</li>
+                                        <li style={{lineHeight:2,width:'90px',marginLeft:'32px',paddingTop:13}}>{item.rcontent}</li>
                                         <li>
-                                            <select>
-                                                <option>未分配</option>
-                                                <option>已分配</option>
+                                            <select onChange={(e)=>this.changesel(e,item.rno)} value={item.allocate}>
+                                                <option value="未分配">未分配</option>
+                                                <option value="已分配">已分配</option>
                                             </select>
                                         </li>
                                         <li style={{lineHeight:2}}>{item.worker}</li>
                                         <li style={{marginLeft:'20px'}}>
-                                            <select>
-                                                <option>未解决</option>
-                                                <option>解决中</option>
-                                                <option>已解决</option>
+                                            <select onChange={(e)=>this.changesel2(e,item.rno)} value={item.rstate}>
+                                                <option value="未解决">未解决</option>
+                                                <option value="解决中">解决中</option>
+                                                <option value="已解决">已解决</option>
                                             </select>
                                         </li>
-                                        <li><button onClick={()=>this.del(idx)}>删除</button></li>
+                                        <li><button onClick={()=>this.del(idx,item.rno)}>删除</button></li>
                                     </ul>
                                 </li>
                             })
                         }
                     </ul>
                 </div>
+                <div  className="numb" >
+                    <ul>
+                        {
+                                this.state.num.map((item)=>{
+                                    return <li key={item} onClick={this.Page.bind(this,item)}>{item}</li>
+                                    // onClick={this.Change.bind(this,item)}
+                                })
+                        }
+                    </ul>
+                </div>
+
             </div>
         )
     }

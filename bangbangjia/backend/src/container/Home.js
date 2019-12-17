@@ -8,13 +8,39 @@ export default class Home extends Component {
     constructor(props){
         super(props);
         this.state={
-            fabu:false
+            fabu:false,
+            adate:[],
+            acontent:[],
+            aimg:["app图标.jpg","app图标.jpg"]
         }
     }
     fabu=(e)=>{
         e.preventDefault();
         this.setState({
             fabu:true
+        })
+    }
+
+    componentWillMount(){
+        fetch("http://localhost:4000/backgonggao")
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res);
+            let date=[];
+            let content=[];
+            let img=[];
+            for(var i=0;i<res.length;i++){
+                if(i==res.length-1||i==res.length-2){
+                    date.push(res[i].adate);
+                    content.push(res[i].acontent.slice(0,17));
+                    img.push(res[i].apicture);
+                }
+            }
+            this.setState({
+                adate:date,
+                acontent:content,
+                aimg:img
+            })
         })
     }
     
@@ -46,19 +72,19 @@ export default class Home extends Component {
                     <p className="home-word">已群发消息</p>
                     <Search className="home-search" placeholder="搜索关键字" />
                     <div className="new-box">
-                        <img className="new-img" src={[require("../img/new1.jpg")]} alt=""/>
+                        <img className="new-img" src={[require("../img/"+this.state.aimg[0])]} alt=""/>
                         <p className="new-word">
-                            10月6日
+                            {this.state.adate[0]}
                             <br/>
-                            【公告】 关于加强小区生活垃圾分类管理的通知...
+                            【公告】 {this.state.acontent[0]}...
                         </p>
                     </div>
                     <div className="new-box">
-                        <img className="new-img" src={[require("../img/new1.jpg")]} alt=""/>
+                        <img className="new-img" src={[require("../img/"+this.state.aimg[1])]} alt=""/>
                         <p className="new-word">
-                            10月3日
+                            {this.state.adate[1]}
                             <br/>
-                            【公告】 关于小区路灯维修时间的通知...
+                            【公告】 {this.state.acontent[1]}...
                         </p>
                     </div>
                     <Button onClick={this.fabu} className="new-btn" type="primary" inline size="small">新建群发</Button>

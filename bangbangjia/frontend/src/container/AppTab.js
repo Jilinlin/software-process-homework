@@ -8,11 +8,33 @@ import Mine from './Mine/Mine'
 export default class AppTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTab: 'home',//默认进入首页
-      // selectedTab: 'greenTab',//默认进入广场
-      // selectedTab: 'my',//默认进入我的
-    };
+    // console.log(this.props);
+    if(this.props.location.state==undefined){
+      this.state = {
+        selectedTab: 'home',
+      };
+    }else{
+      if(this.props.location.state.tab=="1"){
+        this.state = {
+          selectedTab: 'home'
+        }
+        // console.log(1);
+      }else if(this.props.location.state.tab=="2"){
+        this.state = {
+          selectedTab: 'greenTab'
+        }
+        // console.log(2);
+      }else if(this.props.location.state.tab=="3"){
+        this.state = {
+          selectedTab: 'my'
+        }
+        // console.log(3);
+      }else{
+        this.state = {
+          selectedTab: 'home'
+        }
+      }
+    }
   }
 
   render() {

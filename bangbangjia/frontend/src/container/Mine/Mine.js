@@ -9,8 +9,33 @@ export default class Mine extends Component {
         super(props);
         this.state={
             payment:false,
-            setting:false
+            setting:false,
+            data:[]
         }
+    }
+    componentDidMount(){
+        // fetch('http://localhost:8000/mine')
+        // .then((res)=>res.text())
+        // .then((res)=>{
+        //     console.log(res);
+        //     // this.setState({data:res});
+        // })
+        let phone=localStorage.getItem('phonenumber');
+        fetch("http://localhost:8000/mine", { 
+            method: "POST", 
+            mode: 'cors',
+        　　headers: {
+        　　　　'Content-Type': 'application/json'
+        　　},
+        　　body:JSON.stringify({"phonenumber":phone})
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            // console.log(localStorage.getItem('phonenumber'));
+            this.setState({
+                data:res,
+            })
+        })
     }
 
     payment=(e)=>{
@@ -46,12 +71,19 @@ export default class Mine extends Component {
 
                 <div className="box">
                     {/* 用户名片 */}
-                    <div className="card">
-                        <p style={{fontSize:"20px",fontWeight:"bold"}}>韩梅梅</p>
-                        <p><span style={{fontWeight:"bold"}}>电话:</span>15232170109</p>
-                        <p><span style={{fontWeight:"bold"}}>门牌号:</span>1001</p>
-                        <img className="img" src={[require("../../img/hmm.jpg")]} alt=""/>
-                    </div>
+                        <ul className="card">
+                       {
+                         this.state.data.map((item,idx)=>{
+                            return <li key={idx}>
+                                    <p style={{fontSize:"20px",fontWeight:"bold"}}>{item.name}</p>
+                                    <p><span style={{fontWeight:"bold"}}>电话:</span>{item.uphone}</p>
+                                    <p><span style={{fontWeight:"bold"}}>门牌号:</span>{item.unumber}</p>
+                                    <img className="img" src={require(`../../img/`+item.upicture)} alt=""/>
+                            </li>
+                            })
+                        }
+                    </ul>
+            
 
                     {/* 缴费记录 */}
                     <div className="payment" id="payment">

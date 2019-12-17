@@ -16,12 +16,29 @@ export default class Forgetpw extends Component {
     
     doidetified=(e)=>{
             e.preventDefault();
+            // var phone=this.props.location.state.phone;
             let answer=document.querySelector("input[type=text]").value;
             console.log(answer);
-            if(answer=="是"){
-                this.setState({
-                    idetified :true
-               })
+            if(answer!==""){
+                fetch("http://localhost:8000/forgetpw", { 
+                    method: "POST", 
+                    mode: 'cors',
+                　　headers: {
+                　　　　'Content-Type': 'application/json'
+                　　},
+                　　body:JSON.stringify({"answer":answer})
+                })
+                .then((res) => res.text())
+                .then((res) => {
+                    if(res=="login success"){
+                        this.setState({
+                            idetified:true,
+        
+                        })
+                    }else if(res=="login failure"){
+                        alert("该手机号不存在")
+                    }
+                });
             }
         }
      back=(e)=>{
@@ -33,7 +50,7 @@ export default class Forgetpw extends Component {
         }
     render() {
         if(this.state.idetified){
-            return  <Redirect to="/idetified"/>
+            return  <Redirect to={{pathname:"/idetified",state:{phone:document.querySelector("input[type=text]").value}}}/>
         }
         if(this.state.back){
             console.log(this.state.back)
@@ -47,12 +64,12 @@ export default class Forgetpw extends Component {
                     onLeftClick={this.back}  
                >找回密码</NavBar>
                <div className='content'>
-                   <p className='content1' >选择验证方式</p>
+                   <p className='content1' >手机号验证</p>
                    <p className='content2'>&nbsp;&nbsp;>&nbsp;&nbsp;安全验证&nbsp;&nbsp;>&nbsp;&nbsp;找回登录密码</p>
                </div>
                <form onSubmit={this.doidetified}>
                  <div>
-                       <input type='text' name='name' id='name' placeholder='是否愿意采用回答问题方式找回密码'style={{width:'90%',height:'40px',marginLeft:'5%',backgroundColor:'white',border:'0'}}></input>
+                       <input type='text' name='name' id='name' placeholder='请输入注册时的手机号'style={{width:'90%',height:'40px',marginLeft:'5%',backgroundColor:'white',border:'0'}}></input>
                 </div>
                 <div>
                        <button style={ {color: 'white',fontSize: 20,backgroundColor:'#b34449',border:'0',width:'90%',height:'50px',marginLeft:'5%',marginTop:'20px'} } value='登录' type='submit'>立即验证 </button>   

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p> -->
+    <form action="/add" method="POST">
+      新闻标题：<input type="text" name="title"/><br/>
+      新闻内容：<textarea name="content" rows="10"></textarea><br/>
+      <!-- rows="10"写10行 -->
+      <input type="submit" value="submit"/>
+    </form>
+  </body>
+</html>

@@ -1,56 +1,117 @@
 import React, { Component } from 'react'
 import Search from 'antd/lib/input/Search';
 
-const data=[
-    {
-        touxiang:'头像',
-        petName:'Jenny',
-        sex:'女',
-        trueName:'珍妮',
-        tel:13611112222,
-        houseNum:'7号楼四单元301室'
-    },
-    {
-        touxiang:'头像',
-        petName:'Danny',
-        sex:'男',
-        trueName:'丹尼',
-        tel:15033334444,
-        houseNum:'3号楼三单元402室'
-    },
-    {
-        touxiang:'头像',
-        petName:'HanMei',
-        sex:'女',
-        trueName:'韩梅梅',
-        tel:18755555666,
-        houseNum:'5号楼二单元202室'
-    }
-]
 export default class Yezhu extends Component {
     constructor(props){
         super(props);
         this.state={
-            data:data,
-            num:['<',1,2,3,4,5,'>']
+            data:[],
+            num:[1,2,3,4,5]
         }
     }
-    del(idx){
-        // console.log('66');
+    del(idx,uphone){
         let data =[...this.state.data];
         data.splice(idx,1);
         this.setState({
             data
         })
+        fetch("http://localhost:4000/backyezhu_del",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"uphone":uphone})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            console.log(res);
+        })
     }
+    userSearch=(e)=>{
+        e.preventDefault();
+        let message=document.querySelector("input[type=text]").value;
+        if(message!=""){
+            fetch("http://localhost:4000/backyezhu_ser",{
+                method:"POST",
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({"message":message})
+            })
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                this.setState({
+                    data:res
+                })
+                console.log(this.state.data);
+            })
+        }else if(message==""){
+            fetch("http://localhost:4000/backyezhu",{
+                method:"POST",
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({"page":1})
+            })
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                this.setState({
+                    data:res
+                })
+                console.log(this.state.data);
+            })
+        }
+    }
+    componentWillMount(){
+        fetch("http://localhost:4000/backyezhu",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":1})
+        })
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                data:res
+            })
+            console.log(this.state.data);
+        })
+    }
+    Page=(page)=>{
+        fetch("http://localhost:4000/backyezhu",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":page})
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+                data:res
+            })
+        })
+    }
+
     render() {
         return (
             <div>
                 <div className="yzheade">
                     <p>业主管理</p>
-                    <Search
+                    <input
                     placeholder="查找业主"
-                    style={{width:"230px",height:'50px',float:"right",marginTop:15,marginRight:30}}
+                    type="text"
+                    style={{width:"230px",height:'50px',float:"right",marginTop:15,marginRight:30,border:"1px solid #eeeeee",borderRadius:"5px",paddingLeft:"5px"}}
+                    onBlur={this.userSearch}
                     />
                 </div>
                 <div className="yzcontent">
@@ -70,13 +131,14 @@ export default class Yezhu extends Component {
                             this.state.data.map((item,idx)=>{
                                 return <li key={idx}>
                                     <ul className="ul2">
-                                        <li><div style={{width:50,height:50,backgroundColor:'rgb(235,236,253)',borderRadius:50,overflow:'hidden',marginLeft:15}}>{item.touxiang}</div></li>
-                                        <li >{item.petName}</li>
-                                        <li>{item.sex}</li>
-                                        <li>{item.trueName}</li>
-                                        <li style={{width:80}}>{item.tel}</li>
-                                        <li style={{width:110}}>{item.houseNum}</li>
-                                        <li><button onClick={()=>this.del(idx)}>删除</button></li>
+                                        {/* <li><div style={{width:50,height:50,backgroundColor:'rgb(235,236,253)',borderRadius:50,overflow:'hidden',marginLeft:15}}>{item.upicture}</div></li> */}
+                                        <li><img style={{width:50,height:50,borderRadius:50,overflow:'hidden',marginLeft:15}} src={require('../img/'+item.upicture)}/></li>
+                                        <li >{item.uname}</li>
+                                        <li>{item.usex}</li>
+                                        <li>{item.name}</li>
+                                        <li style={{width:80}}>{item.uphone}</li>
+                                        <li style={{width:110}}>{item.unumber}</li>
+                                        <li><button onClick={()=>this.del(idx,item.uphone)}>删除</button></li>
                                     </ul>
                                 </li>
                             })
@@ -87,13 +149,12 @@ export default class Yezhu extends Component {
                     <ul>
                         {
                                 this.state.num.map((item)=>{
-                                    return <li key={item}>{item}</li>
+                                    return <li key={item} onClick={this.Page.bind(this,item)}>{item}</li>
                                     // onClick={this.Change.bind(this,item)}
                                 })
                         }
                     </ul>
                 </div>
-                
             </div>
         )
     }

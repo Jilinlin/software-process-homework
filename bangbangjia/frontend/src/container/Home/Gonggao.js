@@ -10,8 +10,17 @@ export default class Gonggao extends Component {
     constructor(props){
         super(props);
         this.state={
-            home:false
+            home:false,
+            data:[]
         }
+    }
+    componentDidMount(){
+        fetch('http://localhost:8000/gonggao')
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({data:res});
+        })
     }
     // 回到首页
     handleClick=()=>{
@@ -37,24 +46,19 @@ export default class Gonggao extends Component {
 
                 {/* 小区公告内容 */}
                 <List className="my-list">
-                    <Item arrow="horizontal" multipleLine onClick={() => {}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>最新通知 </span>
-                        <Brief>***小区将于10月22-24日收取供暖费。</Brief>
-                        <Brief style={{fontSize:10,marginLeft:'75%',marginTop:'5%'}}>2019-10-22</Brief>
-                    </Item>
-        
-                    <Item arrow="horizontal" multipleLine onClick={() => {}} style={{borderTop:'1px solid #b51804'}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>水费通知 </span>
-                        <Brief>请注意查收水费欠费单哦</Brief>
-                        <Brief style={{fontSize:10,marginLeft:'75%',marginTop:'5%'}}>2019-10-11</Brief>
-                    </Item>
-                    
-                    <Item arrow="horizontal" multipleLine onClick={() => {}} style={{borderTop:'1px solid #b51804'}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>消防检查 </span>
-                        <Brief>住宅小区消防安全检查已完成</Brief>
-                        <Brief style={{fontSize:10,marginLeft:'75%',marginTop:'5%'}}>2019-10-11</Brief>
-                    </Item>
-                    
+                    <ul>
+                        {
+                            this.state.data.map((item,idx)=>{
+                                return <li key={idx}>
+                                    <Item multipleLine onClick={() => {}} style={{borderBottom:'1px solid #b51804'}} >
+                                        <span style={{fontSize:19,fontWeight:'bold'}}> {item.aname} </span>
+                                        <Brief> {item.acontent} </Brief>
+                                        <Brief style={{fontSize:10,marginLeft:'75%'}}> {item.adate} </Brief>
+                                    </Item>
+                                </li>
+                            })
+                        }
+                    </ul>
                 </List>
 
 

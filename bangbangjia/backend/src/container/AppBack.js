@@ -12,6 +12,43 @@ import Tianjia from './guanliperson/Tianjia';
 import Show from './guanliperson/Show';
 
 export default class AppBack extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            touxiang:"login_touxiang.jpg"
+        }
+    }
+    exit=()=>{
+        fetch("http://localhost:4000/backexit")
+            .then((res)=>res.text())
+            .then((res)=>{
+                console.log(res);
+                if(res=="exit success"){
+                    localStorage.removeItem("phone");
+                    alert("退出成功");
+                }else{
+                    alert("出错了");
+                }
+            })
+    }
+    componentWillMount(){
+        let phone=localStorage.getItem("phone");
+        fetch("http://localhost:4000/backtouxiang_shou", { 
+            method: "POST", 
+            mode: 'cors',
+        　　headers: {
+        　　　　'Content-Type': 'application/json'
+        　　},
+        　　body:JSON.stringify({"phone":phone})
+        })
+        .then((res) => res.text())
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                touxiang:res
+            })
+        });
+    }
     render() {
         return (
                 <div className="all" >
@@ -21,8 +58,8 @@ export default class AppBack extends Component {
                     </div>
                     <div className='left'>
                         <div style={{height:"130px",backgroundColor:'rgb(235,236,253)',padding:'20px'}}>
-                            <div style={{width:'85px',height:'85px',backgroundColor:'white',border:'1px solid #d8d8d8',borderRadius:'10px',margin:'0 auto'}}>
-                               <img src={require('../img/touxiang.jpg')} style={{width:'80px',height:'80px',border:'5px solid white',borderRadius:'10px'}}/> 
+                            <div style={{width:'80px',height:'80px',backgroundColor:'white',border:'1px solid #d8d8d8',borderRadius:'10px',margin:'0 auto'}}>
+                               <img src={require('../img/'+this.state.touxiang)} style={{width:'80px',height:'80px',border:'4px solid white',borderRadius:'10px'}}/> 
                             </div>
                         </div>
                         <ul>
@@ -59,7 +96,7 @@ export default class AppBack extends Component {
                         </ul>
                         <div className="exit" style={{padding:'45px 0 0 20px'}}>
                             <i style={{marginRight:"5px",fontSize:10}} className="iconfont icon-icon-"></i>
-                            <Link to='/'>Exit</Link>
+                            <Link onClick={this.exit} to='/'>Exit</Link>
                         </div>
                     </div>
                     <div className='content'>

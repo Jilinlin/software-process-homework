@@ -16,6 +16,7 @@ export default class Resetpw extends Component {
     }
     
         doresetpw=(e)=>{
+            var phone=this.props.location.state.phone;
             let oldpw1=document.querySelector("input[id=name1]").value;
             let newpw1=document.querySelector("input[id=name2]").value;
             oldpw1.split("");
@@ -23,7 +24,26 @@ export default class Resetpw extends Component {
             console.log(oldpw1.split(""))
             console.log(newpw1.split(""))
             if(oldpw1==newpw1&&oldpw1.split('').length>=8&&oldpw1.split('').length<=32){
-                for(var i=0;i<oldpw1.split('').length;i++){
+                    for(var i=0;i<oldpw1.split('').length;i++){
+                        fetch('http://localhost:8000/resetpw', { 
+                                method: "POST", 
+                                mode: 'cors',
+                            　　headers: {
+                            　　　　'Content-Type': 'application/json'
+                            　　},
+                            　　body:JSON.stringify({"phonenumber":phone,"oldpw1":oldpw1})
+                            })
+                            .then((res) => res.text())
+                            .then((res) => {
+                                if(res=="ok"){
+                                        this.setState({
+                                            resetpw :true
+                                        })
+                                }else{
+                                    alert("出问题了");
+                                }
+                        
+                            })
                     this.setState({
                         resetpw :true
                 })
@@ -43,7 +63,7 @@ export default class Resetpw extends Component {
         }
         if(this.state.back){
             console.log(this.state.back)
-            return  <Redirect to="/idetified"/>
+            return  <Redirect to={{pathname:"/idetified",state:{phone:this.props.location.state.phone}}}/>
         }
         return (
             <div style={{width:'100%',height:812,backgroundColor:'#eee'}}>

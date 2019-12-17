@@ -21,21 +21,64 @@ class Xiangqing1 extends Component {
             files: data,
             en: false,
             show: false,
-            config: {}
+            config: {},
+            textareaValue:"",
+            inputValue:''
         }
     }
+
     // 回到首页
-    handleClick=()=>{
-        this.setState({
-            weixiu:true
-        })
-    }
+    
     onChange = (files, type, index) => {
         this.setState({
           files,
         });
+        console.log(files)
     }
-
+    handleTextareaChange=(e)=>{
+        // console.log(e)
+        this.setState({
+            textareaValue:e//当前的值
+        })
+    }
+    handleChange=(e)=>{
+        // console.log(e);
+        this.setState({
+            inputValue:e,//当前的值
+        })
+    }
+    handleClick=()=>{
+        let time=this.state.startTime.toLocaleString();
+        let message={
+            name:'admin',
+            unumber:this.state.inputValue,
+            uphone:13355687451,
+            rcontent:this.state.textareaValue,
+            rtime:time,
+            rstate:'未解决',
+            worker:''
+        };
+        fetch('http://localhost:8000/weixiu1',{
+            method:'POST',
+            mode:'cors',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(message)
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                weixiu:true
+            }) 
+        })
+    }
+    handleClick1=()=>{
+        this.setState({
+            weixiu:true
+        })  
+    }
     // 上门时间
     originbodyScrollY = document.getElementsByTagName('body')[0].style.overflowY;
 
@@ -68,6 +111,7 @@ class Xiangqing1 extends Component {
         startTime,
         endTime,
         });
+        
     }
 
     onCancel = () => {
@@ -78,9 +122,6 @@ class Xiangqing1 extends Component {
         endTime: undefined,
         });
     }
-
- 
-
 
     render() {
         if(this.state.weixiu){
@@ -94,7 +135,7 @@ class Xiangqing1 extends Component {
                 <NavBar
                     mode="light"
                     icon={<Icon style={{color:"black"}} size="lg" type="left" />}
-                    onLeftClick={this.handleClick}
+                    onLeftClick={this.handleClick1}
                     style={{background:"#f2f2f2",height:"60px",lineHeight:"60px"}}
                 >
                     <span style={{fontSize:"22px"}}>维修详情</span>
@@ -103,12 +144,11 @@ class Xiangqing1 extends Component {
                 {/* 维修详情内容 */}       
                 <List>
                     <TextareaItem
-                        {...getFieldProps('count', {
-                        initialValue: '请输入问题详情，以便我们更好的处理',
-                        })}
+                        placeholder="请输入问题详情，以便我们更好的处理"
                         rows={10}
                         count={100}
                         style={{color:'#8a8a8a',fontSize:14}}
+                        onChange={this.handleTextareaChange.bind(this)}
                     />
                 </List>
 
@@ -125,21 +165,18 @@ class Xiangqing1 extends Component {
                 <List>
                     <InputItem
                         ref={el => this.labelFocusInst = el}
-                    ><div onClick={() => this.labelFocusInst.focus()}>上门地址</div></InputItem>
+                        onChange={this.handleChange.bind(this)}
+                    ><div onClick={() => this.labelFocusInst.focus()} >上门地址</div></InputItem>
                 </List>
                 <WhiteSpace/>
 
                 {/* 上门时间输入框 */}
 
                 <List className="calendar-list" style={{ backgroundColor: 'white'}} >
-                    {this.renderBtn('上门时间', 'Select DateTime Range', { pickTime: true })}
+                {this.renderBtn('上门时间', 'Select DateTime', { type: 'one', pickTime: true })}
                     {
                         this.state.startTime &&
-                        <List.Item>Time1: {this.state.startTime.toLocaleString()}</List.Item>
-                    }
-                    {
-                        this.state.endTime &&
-                        <List.Item>Time2: {this.state.endTime.toLocaleString()}</List.Item>
+                        <List.Item>Time: {this.state.startTime.toLocaleString()}</List.Item>
                     }
                 </List>
                 <Calendar
@@ -157,7 +194,7 @@ class Xiangqing1 extends Component {
                 
                 
                 {/* 提交按钮 */}
-                <Button onClick={this.handleClick} style={{width:'50%',height:'50px',color:'white',backgroundColor:'#c01c07',margin:'55px auto'}}>提交申请</Button>
+                <Button type="submit" onClick={this.handleClick} style={{width:'50%',height:'50px',color:'white',backgroundColor:'#c01c07',margin:'55px auto'}}>提交申请</Button>
                             
             </div>
         )

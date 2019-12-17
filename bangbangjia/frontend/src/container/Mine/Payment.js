@@ -7,10 +7,27 @@ export default class Payment extends Component {
     constructor(props){
         super(props);
         this.state={
-            mine:false
+            mine:false,
+            data:[]
         }
     }
-
+    componentDidMount(){
+        let phone=localStorage.getItem('phonenumber');
+        fetch("http://localhost:8000/payment", { 
+            method: "POST", 
+            mode: 'cors',
+        　　headers: {
+        　　　　'Content-Type': 'application/json'
+        　　},
+        　　body:JSON.stringify({"phonenumber":phone})
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            this.setState({
+                data:res,
+            })
+        })
+    }
     mine=(e)=>{
         e.preventDefault();
         this.setState({
@@ -20,7 +37,7 @@ export default class Payment extends Component {
 
     render() {
         if(this.state.mine){
-            return <Redirect to="/shouye" />
+            return <Redirect to={{pathname:"/shouye",state:{tab:"3"}}}/>
         }
         return (
             <div style={{height:"812px",background:"#fff"}}>
@@ -40,35 +57,32 @@ export default class Payment extends Component {
                     </NavBar>
 
                     <br/>
-                    <p style={{fontWeight:"bold"}}>| 最近缴费</p>
+                    <p style={{fontWeight:"bold",fontSize:"25px"}}>| 最近缴费</p>
 
                     {/* 水费缴纳 */}
-                    <div className="waterbox">
-                        <i className="water-icon iconfont icon-icon-humidity-copy"></i>
-                        <div className="waterbox1">
-                            <p className="water-word">水费缴纳</p>
-                            <p>12345677 | 何*花</p>
-                        </div>
-                        <div className="waterbox2">
-                            <p className="water-word1">50.00元</p>
-                            <p style={{float:"right",marginRight:"10px"}}>2019-11-12</p>
-                        </div>
-                    </div>
+                    <ul>
+                        {
+                            this.state.data.map((item,idx)=>{
+                                return <li key={idx}>
+                                    <div className="waterbox">
+                                        <i className="water-icon iconfont icon-icon-humidity-copy  " style={{color:'brown',fontSize:"40px"}}></i>
+                                        <div className="waterbox1">
+                                            <p className="water-word" style={{color:"#000",fontSize:"20px",marginBottom:"5px"}}> {item.ptype} </p>
+                                            <p > {item.name} </p>
+                                        </div>
+                                        <div className="waterbox2">
+                                            <p className="water-word1" style={{fontSize:"20px",margin:"0 10px 5px 0",width:"80px",paddingRight:"10px"}}> <span style={{float:"right"}}>{item.addmoney}元 </span></p>
+                                            <p style={{float:"right",marginRight:"10px",width:"170px"}}> {item.ptime} </p>
+                                        </div>
+                                    </div>
+                                    <hr style={{width:"90%",marginLeft:"5%"}} />
+                                </li>
+                            })
+                        }
+                    </ul>
+                    
 
-                    <hr style={{width:"90%",marginLeft:"5%"}} />
-
-                    {/* 电费缴纳 */}
-                    <div className="waterbox">
-                        <i className="water-icon iconfont icon-shandian-copy"></i>
-                        <div className="waterbox1">
-                            <p className="water-word">电费缴纳</p>
-                            <p>12345677 | 何*花</p>
-                        </div>
-                        <div className="waterbox2">
-                            <p className="water-word1">50.00元</p>
-                            <p style={{float:"right",marginRight:"10px"}}>2019-11-12</p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         )

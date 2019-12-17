@@ -19,6 +19,7 @@ import Xiangqing from './container/Home/Xiangqing'//（维修二级页面）
 import Xianzhi from './container/Home/Xianzhi'//闲置
 import Wupin from './container/Home/Wupin'//（闲置二级页面）
 import Tousu from './container/Home/Tousu'//投诉
+import Jianyi from './container/Home/Tousujianyi'//(投诉建议)
 import Baike from './container/Home/Baike'//交通违章
 import FindTraffic from './container/Home/Traffic/FindTraffic'//（交通违章二级页面）
 import BreakTraffic from './container/Home/Traffic/BreakTraffic'//（交通违章二级页面）
@@ -82,6 +83,8 @@ export default class App extends Component {
                 <Route  exact path="/xiangqing" component={Xiangqing}  />
                 {/* 闲置信息二级页面 */}
                 <Route  exact path="/wupin" component={Wupin}/>
+                {/* 投诉建议二级页面 */}
+                <Route  exact path="/jianyi" component={Jianyi}  />
                 {/* 违章查询二级页面 */}
                 <Route  exact path="/findtraffic" component={FindTraffic}  />
                 <Route  exact path="/breaktraffic" component={BreakTraffic}  />

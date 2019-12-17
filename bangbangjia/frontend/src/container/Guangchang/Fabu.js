@@ -27,27 +27,52 @@ export default class Fabu extends Component {
         })
     }
     tijiao=()=>{
-        this.setState({
-            sub:true
+        var img;
+        if(this.state.files[0]){
+            img=this.state.files[0].file.name
+        }else{
+            img=''
+        }
+        let message={
+            uphone:localStorage.getItem("phonenumber"),
+            plcontent:this.state.inputValue,
+            plpicture:img,
+            pltime:new Date().toLocaleTimeString(),
+            plike:0,
+            pread:0,
+            comment:"",
+            commentno:0,
+            follow:"关注"
+        };
+        fetch('http://localhost:8000/fabu',{
+            method:'POST',
+            mode:'cors',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(message)
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            this.setState({
+                sub:true
+            }) 
+            console.log(res);
         })
     }
     handleChange=(e)=>{
         this.setState({
             inputValue:e.target.value,//当前的值
         })
+        // console.log(this.state.inputValue);
     }
     render() {
         const { files } = this.state;
         if(this.state.back){
-            // console.log(this.state.selectedTab);
-            return <Redirect to="/shouye"/>
-            // return <Redirect to="/guangchang"/>
-
-
+            return <Redirect to={{pathname:"/shouye",state:{tab:"2"}}}/>
          }
          if(this.state.sub){
-            console.log(this.state.inputValue);
-            return <Guangchang value={this.state.inputValue} />
+            return <Redirect to={{pathname:"/shouye",state:{tab:"2"}}}/>
          }
         return (
             <div className="Fall" style={{height:"812px",background:"#F4F3F3"}}>

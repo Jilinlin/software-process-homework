@@ -10,8 +10,18 @@ export default class Tousu extends Component {
     constructor(props){
         super(props);
         this.state={
-            home:false
+            home:false,
+            jianyi:false,
+            data:[]
         }
+    }
+    componentDidMount(){
+        fetch('http://localhost:8000/tousu')
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({data:res});
+        })
     }
     // 回到首页
     handleClick=()=>{
@@ -19,9 +29,17 @@ export default class Tousu extends Component {
             home:true
         })
     }
+    doNext=()=>{
+        this.setState({
+            jianyi:true
+        })
+    }
     render() {
         if(this.state.home){
             return  <Redirect to="/shouye"/>
+        }
+        if(this.state.jianyi){
+            return  <Redirect to="/jianyi"/>
         }
         return (
             <div style={{height:"812px",background:"#F4F3F3"}}>
@@ -37,22 +55,26 @@ export default class Tousu extends Component {
 
                 {/* 投诉建议内容 */}
                 <List className="my-list">
-                    <Item multipleLine onClick={() => {}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>2019-12-12 </span>
-                        <Brief style={{marginTop:'5%'}}>希望小区绿化可以更加完善，多一些健身设施</Brief>
-                    </Item>
-        
-                    <Item multipleLine onClick={() => {}} style={{borderTop:'1px solid #b51804'}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>2019-12-10 </span>
-                        <Brief style={{marginTop:'5%'}}>小区车辆随意停放，影响出行，希望可以合理<br/>安排车位，设置相应标示</Brief>
-                    </Item>
-
-                    <Item multipleLine onClick={() => {}} style={{borderTop:'1px solid #b51804'}}>
-                        <span style={{fontSize:19,fontWeight:'bold'}}>2019-1-12 </span>
-                        <Brief style={{marginTop:'5%'}}>小区的垃圾随意投放现象严重，建议设置分类<br/>垃圾桶，并规定投放时间</Brief>
-                    </Item>
-                    
-                </List>                
+                <ul>
+                        {
+                            this.state.data.map((item,idx)=>{
+                                return <li key={idx}>
+                                    <Item multipleLine onClick={() => {}}>
+                                        <span style={{fontSize:19,fontWeight:'bold'}}> {item.uname} </span>
+                                        <Brief style={{marginTop:'5%'}}> {item.fcontent}</Brief>
+                                    </Item>
+                                </li>
+                            })}
+                </ul>
+                </List>   
+                {/* 添加投诉信息内容 */}
+                <NavBar
+                    mode="light"
+                    style={{background:"#f2f2f2",lineHeight:"60px",width:'100%',position:'fixed',bottom:'0'}}
+                    // ,position:'fixed',bottom:'0'
+                >
+                    <i onClick={()=>{this.doNext()}} style={{fontSize:50,color:'#ab1602'}} className='iconfont icon-jiahao'></i>
+                </NavBar>             
             </div>
         )
     }

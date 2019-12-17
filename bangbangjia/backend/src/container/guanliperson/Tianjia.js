@@ -7,46 +7,71 @@ const data = [];
 
 export default class Tianjia extends Component {
     constructor(props){
-        super(props);
-                this.state={
-                    back:false,
-                    files: data,
-                    tianjia:false
-                }}
+    super(props);
+    this.state={
+        back:false,
+        files: data,
+        tianjia:false
+    }}
     
-            back=(e)=>{
-                    e.preventDefault();
-                    this.setState({
-                        back:true
-                    })
-                }
-            tianjia=(e)=>{
-                    e.preventDefault();
-                    let name1=document.querySelector("input[name=name1]").value;
-                    let name2=document.querySelector("input[name=name2]").value;
-                    let name3=document.querySelector("input[name=name3]").value;
-                    let name4=document.querySelector("input[name=name4]").value;
-                    let name5=document.querySelector("input[name=name5]").value;
+    back=(e)=>{
+        e.preventDefault();
+        this.setState({
+            back:true
+        })
+    }
+    // 添加图片      
+    onChange = (files, type, index) => {
+        console.log(files, type, index);
+        // console.log(files[0].file.name);
+        this.setState({
+            files
+        });
+    };
+    onTabChange = (key) => {
+    console.log(key);
+    };
 
-                    if(name1!==''&&name2!==''&&name3!==''&&name4!==''&&name5!==''){
-                        this.setState({
-                            tianjia :true
-                        })
-                    }
-                    
-                }
-        
-            // 添加图片
-                
-                  onChange = (files, type, index) => {
-                    console.log(files, type, index);
-                    this.setState({
-                      files
-                    });
-                  };
-                  onTabChange = (key) => {
-                    console.log(key);
-                  };
+    addmanager=(e)=>{
+        e.preventDefault();
+        //这里缺一个头像图片获取
+        let mpicture=this.state.files[0].file.name;
+        let mno=document.querySelector("input[name=name1]").value;
+        let mname=document.querySelector("input[name=name2]").value;
+        let mpwd=document.querySelector("input[name=pwd]").value;
+        let msex=document.querySelector("input[name=sex]").value;
+        let mage=document.querySelector("input[name=name3]").value;
+        let mid=document.querySelector("input[name=name4]").value;
+        let mphone=document.querySelector("input[name=name5]").value;
+
+        let message={
+            mpicture:mpicture,
+            mno:mno,
+            mname:mname,
+            mpwd:mpwd,
+            msex:msex,
+            mage:mage,
+            mid:mid,
+            mphone:mphone,
+            mstate:0
+        };
+        fetch("http://localhost:4000/backaddmanager", { 
+            method: "POST", 
+            mode: 'cors',
+        　　headers: {
+        　　　　'Content-Type': 'application/json'
+        　　},
+        　　body:JSON.stringify(message)
+        })
+        .then((res) => res.text())
+        .then((res) => {
+            console.log(res);
+            this.setState({
+                tianjia :true
+            })
+        });
+    }
+
     render() {
         if(this.state.back){
             // console.log(this.state.back)
@@ -76,11 +101,10 @@ export default class Tianjia extends Component {
                         disableDelete
                         style={{marginLeft:'280px'}}
                         accept="image/jpg"
-
-                        />
+                />
                 </div>
-                <div style={{marginLeft:'290px',width:'660px',height:'20px'}}>只支持.jpg格式</div>
-                <form className='tianjia1' onSubmit={this.tianjia}>
+                <div style={{marginLeft:'290px',width:'660px',height:'20px',marginBottom:10}}>只支持.jpg格式</div>
+                <form className='tianjia1'>
                     <div>
                          <p style={{marginLeft:'200px',fontSize:18}}>工号：</p>
                          <input name='name1' style={{marginLeft:'30px',height:25,borderRadius:5,border:'1px solid gray'}} placeholder='单行输入'type='text'></input>
@@ -90,18 +114,26 @@ export default class Tianjia extends Component {
                          <input  name='name2'style={{marginLeft:'30px',height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'></input>
                     </div>
                     <div>
+                         <p style={{marginLeft:'200px',fontSize:18}}>密码：</p>
+                         <input  name='pwd'style={{marginLeft:'30px',height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'></input>
+                    </div>
+                    <div>
+                         <p style={{marginLeft:'200px',fontSize:18}}>性别：</p>
+                         <input  name='sex'style={{marginLeft:'30px',height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'></input>
+                    </div>
+                    <div>
                          <p style={{marginLeft:'200px',fontSize:18}}>年龄：</p>
                          <input  name='name3'style={{marginLeft:'30px',height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'/>
                     </div>
                     <div>
                          <p style={{marginLeft:'200px',fontSize:18}}>身份证号:</p>
-                         <input  name='name4'style={{marginLeft:5,height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'></input>
+                         <input  name='name4'style={{marginLeft:8,height:25,borderRadius:5,border:'1px solid gray'}}  placeholder='单行输入'type='text'></input>
                     </div>
                     <div>
                          <p style={{marginLeft:'200px',fontSize:18}}>手机号：</p>
-                         <input  name='name5'style={{marginLeft:'8px',height:25,borderRadius:5,border:'1px solid gray'}} placeholder='单行输入'type='text'></input>
+                         <input  name='name5'style={{marginLeft:11,height:25,borderRadius:5,border:'1px solid gray'}} placeholder='单行输入'type='text'></input>
                     </div>
-                    <button value='添加' className='tianjia3' type='submit'>添加</button>
+                    <button value='添加' className='tianjia3' type='submit'  onClick={this.addmanager}>添加</button>
                 </form>
             </div>
         )

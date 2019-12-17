@@ -2,13 +2,15 @@ import React from 'react';
 import {Redirect} from "react-router-dom"
 import { NavBar, Icon} from 'antd-mobile';
 import '../Jiaofei.css'
+// import hashHistory from 'history/createHashHistory';
 const touxiang=require('../../../../img/touxiang.jpg')
 
 class Paypwd extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            back:false
+            back:false,
+            payok:false
         }
     }
     // 修改状态跳到下一个input
@@ -22,21 +24,38 @@ class Paypwd extends React.Component {
         })
     }
     // 支付成功
-    doNext=()=>{
-        // const password="123456";
-        // let pwd1=document.querySelector("input[name=pwd1]").value;
-        // let pwd2=document.querySelector("input[name=pwd2]").value;
-        // let pwd3=document.querySelector("input[name=pwd3]").value;
-        // let pwd4=document.querySelector("input[name=pwd4]").value;
-        // let pwd5=document.querySelector("input[name=pwd5]").value;
-        // let pwd6=document.querySelector("input[name=pwd6]").value;
-        // let pwd=pwd1+pwd2+pwd3+pwd4+pwd5+pwd6;
-        // if(pwd===password){
-        // }
-        // console.log(pwd);
+    doNext=(e)=>{
+        e.preventDefault();
+        let pwd1=document.querySelector("input[name=pwd1]").value;
+        let pwd2=document.querySelector("input[name=pwd2]").value;
+        let pwd3=document.querySelector("input[name=pwd3]").value;
+        let pwd4=document.querySelector("input[name=pwd4]").value;
+        let pwd5=document.querySelector("input[name=pwd5]").value;
+        let pwd6=document.querySelector("input[name=pwd6]").value;
+        let pwd=pwd1+pwd2+pwd3+pwd4+pwd5+pwd6;
+        let phone=localStorage.getItem("phonenumber");
+        fetch('http://localhost:8000/jiaofeipay',{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"phone":phone,"pwd":pwd})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            if(res=="ok"){
+                this.setState({
+                    payok:true
+                })
+            }else if(res=="error"){
+                alert("密码不正确");
+            }
+        })
     }
 
     render(){
+
         let jine=this.props.location.state.jine;
         let danwei=this.props.location.state.danwei;
         let huhao=this.props.location.state.huhao;
@@ -45,6 +64,8 @@ class Paypwd extends React.Component {
         if(this.state.back){
             // console.log(this.props.location.state);
             return <Redirect to={{pathname:"/payment",state:{jine:jine,goback:goback,danwei:danwei,huhao:huhao,message:message}}}/>
+        }else if(this.state.payok){
+            return <Redirect to={{pathname:"/paysuccess"}}/>
         }
         return(    
             <div className="out">
@@ -69,7 +90,7 @@ class Paypwd extends React.Component {
                             </span>
                         </NavBar>
                         <div className="yanzheng">
-                            <form className="pwd" action="/paysuccess" onSubmit={this.doNext}>
+                            <form className="pwd" onSubmit={this.doNext}>
                                 <ul className="pwdul">
                                     <li>
                                         <input onChange={this.handleChange} autoFocus={true} type="password" name="pwd1" maxLength="1"/>

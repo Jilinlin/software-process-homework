@@ -17,9 +17,31 @@ export default class Idetified extends Component {
     
           handle=(e)=>{
             e.preventDefault();
+            console.log(this.props);
+            var phone=this.props.location.state.phone;
+           
             let handle=document.querySelector("input[type=text]").value;
             console.log(handle);
             if(handle!==""){
+                fetch('http://localhost:8000/idetified', { 
+                    method: "POST", 
+                    mode: 'cors',
+                　　headers: {
+                　　　　'Content-Type': 'application/json'
+                　　},
+                　　body:JSON.stringify({"phonenumber":phone,"handle":handle})
+                })
+                .then((res) => res.text())
+                .then((res) => {
+                    if(res=="父亲名字验证一致"){
+                            this.setState({
+                                handle :true
+                            })
+                    }else if(res=='父亲名字验证不一'){
+                        alert("出问题了");
+                    }
+            
+                })
                 this.setState({
                      handle :true
                })
@@ -36,7 +58,7 @@ export default class Idetified extends Component {
     render() {
         if(this.state.handle){
             console.log(this.state.handle)
-            return  <Redirect to="/resetpw"/>
+            return  <Redirect to={{pathname:"/resetpw",state:{phone:this.props.location.state.phone}}}/>
         }
         if(this.state.back){
             console.log(this.state.back)
@@ -50,7 +72,7 @@ export default class Idetified extends Component {
                     onLeftClick={this.back}  
                >注册</NavBar>
                <div className='content'>
-                   <p className='content3' >选择验证方式</p>
+                   <p className='content3' >手机号验证</p>
                    <p className='content4'>&nbsp;&nbsp;>&nbsp;&nbsp;安全验证</p>
                    <p className='content5'>&nbsp;&nbsp;>&nbsp;&nbsp;重置登录密码</p>
                </div>

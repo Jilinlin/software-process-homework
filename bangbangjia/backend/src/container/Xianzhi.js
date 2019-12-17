@@ -1,46 +1,65 @@
 import React, { Component } from 'react'
 import Search from 'antd/lib/input/Search';
 
-const data=[
-    {
-        touxiang:'头像',
-        petName:'Jenny',
-        trueName:'珍妮',
-        tel:13611112222,
-        time:'2019.10.10',
-        world:'出售旧沙发一套，五成新，有意私聊'
-    },
-    {
-        touxiang:'头像',
-        petName:'Danny',
-        trueName:'丹尼',
-        tel:15033334444,
-        time:'2019.10.3',
-        world:'出售毛呢大衣一件，八成新，230元'
-    },
-    {
-        touxiang:'头像',
-        petName:'HanMei',
-        trueName:'韩梅梅',
-        tel:18755555666,
-        time:'2019.9.9',
-        world:'出售各种包包，有意者联系我~'
-    }
-]
 export default class Yezhu extends Component {
     constructor(props){
         super(props);
         this.state={
-            data:data,
-            num:['<',1,2,3,4,5,'>']
+            data:[],
+            num:[1,2,3,4,5]
         }
     }
-    del(idx){
-        console.log('66');
+    del(idx,uname){
         let data =[...this.state.data];
         data.splice(idx,1);
         this.setState({
             data
+        })
+        fetch("http://localhost:4000/backxianzhi_del",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"uname":uname})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            console.log(res);
+        })
+    }
+    componentWillMount(){
+        fetch("http://localhost:4000/backxianzhi",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":1})
+        })
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                data:res
+            })
+            console.log(this.state.data);
+        })
+    }
+    Page=(page)=>{
+        fetch("http://localhost:4000/backxianzhi",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"page":page})
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+                data:res
+            })
         })
     }
     render() {
@@ -66,13 +85,13 @@ export default class Yezhu extends Component {
                             this.state.data.map((item,idx)=>{
                                 return <li key={idx}>
                                     <ul className="ul2">
-                                        <li><div style={{width:50,height:50,backgroundColor:'rgb(235,236,253)',borderRadius:50,overflow:'hidden',marginLeft:-5}}>{item.touxiang}</div></li>
-                                        <li style={{marginLeft:-10}}>{item.petName}</li>
-                                        <li>{item.trueName}</li>
-                                        <li>{item.tel}</li>
-                                        <li>{item.time}</li>
-                                        <li style={{width:120,lineHeight:2}}>{item.world}</li>
-                                        <li><button onClick={()=>this.del(idx)}>删除</button></li>
+                                        <li><img style={{width:50,height:50,backgroundColor:'rgb(235,236,253)',borderRadius:50,overflow:'hidden',marginLeft:-5}} src={require('../img/'+item.upicture)}/></li>
+                                        <li style={{marginLeft:-10}}>{item.uname}</li>
+                                        <li>{item.name}</li>
+                                        <li>{item.uphone}</li>
+                                        <li style={{width:100}}>{item.ldate}</li>
+                                        <li style={{width:100,lineHeight:1.5,paddingTop:13}}>{item.lcontent}</li>
+                                        <li><button onClick={()=>this.del(idx,item.uname)}>删除</button></li>
                                     </ul>
                                 </li>
                             })
@@ -82,10 +101,10 @@ export default class Yezhu extends Component {
                 <div  className="numb" >
                     <ul>
                         {
-                                this.state.num.map((item)=>{
-                                    return <li key={item}>{item}</li>
-                                    // onClick={this.Change.bind(this,item)}
-                                })
+                            this.state.num.map((item)=>{
+                                return <li key={item} onClick={this.Page.bind(this,item)}>{item}</li>
+                                // onClick={this.Change.bind(this,item)}
+                            })
                         }
                     </ul>
                 </div>

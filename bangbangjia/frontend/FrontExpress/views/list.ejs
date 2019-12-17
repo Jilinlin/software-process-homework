@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/list.css" />
+</head>
+<body>
+    <!-- ejs文件可以写特殊标记 -->
+
+    <%=userName %>
+    <!-- 拿到index.js里传过来的 userName  输出才写%=xxx  说明js逻辑可以不写=-->
+    <ul>
+        <%for(var i=0;i<newList.length;i++){ %>
+            <li>
+                <a href="/detail?newId=<%=newList[i]['newId'] %>"><%=newList[i]["newTitle"] %></a>
+            </li>
+        <%} %>
+    </ul>
+    <img src="/images/1.jpg"/>
+</body>
+</html>

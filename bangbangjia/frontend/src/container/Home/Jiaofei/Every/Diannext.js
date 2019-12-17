@@ -9,7 +9,8 @@ export default class Diannext extends React.Component {
         super(props);
         this.state={
             diaofei:false,
-            pay:false
+            pay:false,
+            data:[]
         }
     }
     // 回到电费-新增用户
@@ -18,9 +19,48 @@ export default class Diannext extends React.Component {
             diaofei:true
         })
     }
-    payThis=()=>{
-        this.setState({
-            pay:true
+    payThis=(e)=>{
+        e.preventDefault();
+        let jine=document.querySelector("input[type=text]").value;
+        let danwei=this.props.location.state.danwei;
+        let huhao=this.props.location.state.huhao;
+        let time=new Date().toLocaleString();
+        console.log(time);
+        fetch('http://localhost:8000/jiaofeiadd',{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"danwei":danwei,"huhao":huhao,"jine":jine,"time":time})
+            // body:JSON.stringify({"danwei":danwei,"huhao":huhao,"jine":jine})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            if(res=="ok"){
+                this.setState({
+                    pay:true
+                })
+            }else{
+                alert("出问题了");
+            }
+        })
+    }
+    componentWillMount(){
+        let danwei=this.props.location.state.danwei;
+        let huhao=this.props.location.state.huhao;
+        fetch('http://localhost:8000/jiaofei',{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"danwei":danwei,"huhao":huhao})
+        })
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res[0]);
+            this.setState({data:res[0]});
         })
     }
     render(){
@@ -47,7 +87,7 @@ export default class Diannext extends React.Component {
 
                 <div style={{background:"#fff"}}> 
                     <div className="diannexttitle">
-                        <div className="icon">
+                        <div className="dianicon">
                             <i style={{fontSize:35,color:"white"}} className='iconfont icon-shandian'></i>
                         </div>
                         <span className="dianfeispan">电费</span>
@@ -56,22 +96,22 @@ export default class Diannext extends React.Component {
                     <div className="nextcontent">
                         <ul>
                             <li className="nextli">
-                                <span className="lileft">缴费单位</span><span className="liright">{this.props.location.state.danwei}</span>
+                                <span className="lileft">缴费单位</span><span className="liright">{this.state.data.punit}</span>
                             </li>
                             <li className="nextli">
-                                <span className="lileft">缴费户号</span><span className="liright">{this.props.location.state.huhao}</span>
+                                <span className="lileft">缴费户号</span><span className="liright">{this.state.data.unumber}</span>
                             </li>
                             <li className="nextli">
-                                <span className="lileft">户名</span><span className="liright">王*花</span>
+                                <span className="lileft">户名</span><span className="liright">{this.state.data.name}</span>
                             </li>
                             <li className="nextli">
-                                <span className="lileft">住址信息</span><span className="liright">xx小区</span>
+                                <span className="lileft">住址信息</span><span className="liright">{this.state.data.cellname}</span>
                             </li>
                             <li className="nextli">
-                                <span className="lileft">当前可用余额</span><span className="liright">50.00</span>
+                                <span className="lileft">当前可用余额</span><span className="liright">{this.state.data.balance}</span>
                             </li>
                             <li className="nextli">
-                                <span className="lileft">当前欠费余额</span><span className="liright">0.00</span>
+                                <span className="lileft">当前欠费余额</span><span className="liright">{this.state.data.arrearage}</span>
                             </li>
                         </ul>
                     </div>

@@ -132,7 +132,7 @@ export default class Home extends Component {
                     mode="light"
                     style={{border:"1px solid white",height:40}}
                 > 
-                    <div style={{color:'#b01f0c',fontSize:8}}>附近热门</div>
+                    <div style={{color:'#b01f0c',fontSize:15}}>附近热门</div>
                 </NavBar>
 
                 {/* 五、特大优惠 */}

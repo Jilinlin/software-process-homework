@@ -8,29 +8,9 @@ const password="123456";
 class Paysuccess extends React.Component {
     constructor(props){
         super(props);
-        // 获取密码
-        let arr=this.props.location.search.slice(1).split("&");
-        let pwd="";
-        arr.map((item)=>{
-            let arr2=item.split("=");
-            // console.log(arr2[1]);
-            pwd=pwd+arr2[1];
-        })
-        // console.log(pwd);
-        if(pwd==password){
-            this.state={
-                back:false,
-                display:true,
-                display2:false
-            }
-        }else{
-            this.state={
-                back:false,
-                display:false,
-                display2:true
-            }
+        this.state={
+            back:false
         }
-        
     }
     // 回到缴费
     handleClick=()=>{
@@ -41,7 +21,7 @@ class Paysuccess extends React.Component {
     
     render(){
         if(this.state.back){
-            return <Redirect to="/dianfei"/>
+            return <Redirect to="/jiaofei"/>
         }
         return(    
             <div className="out">
@@ -65,15 +45,11 @@ class Paysuccess extends React.Component {
                                 请输入支付密码
                             </span>
                         </NavBar>
-                        <div className={this.state.display?"success":"success1"}>
+                        <div className="success">
                             <i className="iconfont icon-dui" style={{fontSize:100,color:"#0190FB"}}></i>
                             <div className="successword">验证成功</div>
                         </div>
 
-                        <div className={this.state.display2?"failure":"failure1"}>
-                            <i className="iconfont icon-chahao" style={{fontSize:100,color:"#0190FB"}}></i>
-                            <div className="successword">验证失败</div>
-                        </div>
 
                     </div>
                 </div>

@@ -10,27 +10,49 @@ export default class Register extends Component {
     constructor(props){
         super(props);
         this.state={
-            register:false
+            register:false,
+            phone:""
         }
         this.state={
             back:false
         }
     }
     
+
+   
         doregister=(e)=>{
             e.preventDefault();
-            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+            // var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
             let phonenumber=document.querySelector("input[type=tel]").value;
             console.log(phonenumber);
-            if(myreg.test(phonenumber)){
-                this.setState({
-                     register :true
-               })
+            if(phonenumber!==''){
+                fetch('http://localhost:8000/register', { 
+                    method: "POST", 
+                    mode: 'cors',
+                　　headers: {
+                　　　　'Content-Type': 'application/json'
+                　　},
+                　　body:JSON.stringify({"phonenumber":phonenumber})
+                })
+                .then((res) => res.text())
+                .then((res) => {
+                    if(res=="can register"){
+                            this.setState({
+                                register :true,
+                                phone:phonenumber
+                            })
+                    }else{
+                        alert("该手机号已存在");
+                    }
+            
+                })
             }
             else{
                 alert('请检查输入的手机号是否有误')
             }
         }
+        
+
         back=(e)=>{
             e.preventDefault();
             this.setState({
@@ -41,7 +63,7 @@ export default class Register extends Component {
     render() {
         if(this.state.register){
             console.log(this.state.register)
-            return  <Redirect to="/setquestion"/>
+            return  <Redirect to={{pathname:"/setquestion",state:{phone:this.state.phone}}}/>
         }
         if(this.state.back){
             console.log(this.state.back)

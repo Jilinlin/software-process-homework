@@ -27,15 +27,57 @@ export default class Fabu extends Component {
             dpValue: null,
             customChildValue: null,
             visible: false,
+            ano:0
         }
     }
     gonggao=(e)=>{
         e.preventDefault();
-        this.setState({
-            gonggao:true
+        // this.setState({
+        //     gonggao:true
+        // })
+        let aname=document.querySelector("input[type=text]").value;
+        let acontent=document.querySelector("textarea[name=acontent]").value;
+        let message={
+            apicture:"new1.jpg",
+            ano:this.state.ano,
+            aname:aname,
+            acontent:acontent,
+            adate:this.state.time.toLocaleString()
+        };
+        if(aname!=""&&acontent!=""){
+            fetch("http://localhost:4000/backfabu", { 
+                method: "POST", 
+                mode: 'cors',
+            　　headers: {
+            　　　　'Content-Type': 'application/json'
+            　　},
+            　　body:JSON.stringify(message)
+            })
+            .then((res) => res.text())
+            .then((res) => {
+                this.setState({
+                    gonggao:true
+                })
+                console.log(res);
+            });
+        }else{
+            alert("不能提交空内容");
+        }
+        
+    }
+
+    componentWillMount(){
+        fetch("http://localhost:4000/backgonggao")
+        .then((res)=>res.json())
+        .then((res)=>{
+            let ano=res.length+1;
+            this.setState({
+                ano:ano
+            })
         })
     }
-      
+
+
     render() {
         if(this.state.gonggao){
             return <Redirect to="/appback/gonggao" />
@@ -59,11 +101,11 @@ export default class Fabu extends Component {
                 </List>
                 <div className="fabu-title">
                     <button className="title">标题</button>
-                    <input type="text" className="title-input"></input>
+                    <input name="aname" type="text" className="title-input"></input>
                 </div>
                 <div className="fabu-content">
                     <button className="title">内容</button>
-                    <textarea className="title-input"></textarea>
+                    <textarea name="acontent" className="title-input"></textarea>
                 </div>
                 <Button onClick={this.gonggao} type="primary" inline size="small" style={{marginLeft:"45%"}}>发布</Button>
             </div>

@@ -16,12 +16,32 @@ export default class Setquestion extends Component {
     
         dosetquestion=(e)=>{
             e.preventDefault();
+            var phone=this.props.location.state.phone;
             let setquestion=document.querySelector("input[type=text]").value;
             console.log(setquestion);
             if(setquestion!==""){
-                this.setState({
-                     setquestion :true
-               })
+            //     this.setState({
+            //          setquestion :true
+            //    })
+            fetch('http://localhost:8000/setques', { 
+                method: "POST", 
+                mode: 'cors',
+            　　headers: {
+            　　　　'Content-Type': 'application/json'
+            　　},
+            　　body:JSON.stringify({"phonenumber":phone,"setquestion":setquestion})
+            })
+            .then((res) => res.text())
+            .then((res) => {
+                if(res=="ok"){
+                        this.setState({
+                            setquestion :true
+                        })
+                }else{
+                    alert("出问题了");
+                }
+        
+            })
             }
         }
         back=(e)=>{
@@ -32,9 +52,10 @@ export default class Setquestion extends Component {
 
         }
     render() {
+        // console.log(this.props.location.state.phone);
         if(this.state.setquestion){
             console.log(this.state.setquestion)
-            return  <Redirect to="/setpassword"/>
+            return  <Redirect to={{pathname:"/setpassword",state:{phone:this.props.location.state.phone}}}/>
         }
         if(this.state.back){
             console.log(this.state.back)

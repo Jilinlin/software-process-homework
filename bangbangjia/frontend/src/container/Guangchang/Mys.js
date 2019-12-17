@@ -2,28 +2,48 @@ import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom';
 import { NavBar, Icon } from 'antd-mobile';
 
-const data=[
-    {
-        id:1,
-        name:'韩梅梅',
-        time:'19小时前',
-        world:'李阿姨跳的真好',
-        dianzan:1212,
-        pinglun:600
-    }]
 export default class Mine extends Component {
     constructor(props){
         super(props);
         this.state={
             back:false,
-            data:{data}
+            data:[]
         }
     }
-    del(idx){
-        console.log('66');
+    componentDidMount(){
+        let phone=localStorage.getItem("phonenumber");
+        fetch('http://localhost:8000/mys',{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"phone":phone})
+        })
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({data:res});
+        })
+    }
+    del(idx,pltime){
+        let data =[...this.state.data];
         data.splice(idx,1);
         this.setState({
             data
+        })
+        // console.log(pltime)
+        fetch("http://localhost:8000/mys_del",{
+            method:"POST",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"pltime":pltime})
+        })
+        .then((res)=>res.text())
+        .then((res)=>{
+            console.log(res);
         })
     }
     mine=()=>{
@@ -32,8 +52,9 @@ export default class Mine extends Component {
         })
     }
     render() {
+        // console.log(this.state.data)
         if(this.state.back){
-            return  <Redirect to="/shouye"/>
+            return  <Redirect to={{pathname:"/shouye",state:{tab:"2"}}}/>
          }
         return (
             <div className="Gall" style={{height:"812px",background:"#F4F3F3"}}>
@@ -47,21 +68,31 @@ export default class Mine extends Component {
                 </NavBar>
                 <ul className="kuang">
                     {
-                        data.map((item,idx)=>{
+                        this.state.data.map((item,idx)=>{
                             return <li key={idx}>
                                 <div style={{height:80}}>
-                                    <div className="touxiang"></div>
+                                    <div className="touxiang">
+                                        <img src={require(`../../img/`+item.picture)} />
+                                    </div>
                                     <div className="name">
                                         <p>{item.name}</p>
-                                        <p className="time">{item.time}</p>
+                                        <p className="time">{item.pltime}</p>
                                     </div>
-                                    <button className="del" onClick={()=>this.del(idx)}>删除</button>
+                                    <button className="del" onClick={()=>this.del(idx,item.pltime)}>删除</button>
                                 </div>
-                                <p className="zhengwen">{item.world}</p>
-                                <div className='tupian'></div>
+                                <p className="zhengwen">{item.plcontent}</p>
+                                <div className='tupian'>
+                                    {
+                                        function(){
+                                            if(item.plpicture){
+                                                return <img src={require(`../../img/`+item.plpicture)}/>     
+                                            }
+                                        }()
+                                    }
+                                </div>
                                 <footer>
-                                    <div className="iconfont icon-dianzan"><span>{item.dianzan}</span></div>
-                                    <div className="iconfont icon-pinglun"><span>{item.pinglun}</span></div>
+                                    <div className="iconfont icon-dianzan"><span>{item.like}</span></div>
+                                    <div className="iconfont icon-pinglun"><span>{item.commentno}</span></div>
                                 </footer>
                             </li>
                             })
