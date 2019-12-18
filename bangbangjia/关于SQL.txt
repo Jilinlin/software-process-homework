@@ -1,0 +1,116 @@
+十个表格：
+业主管理(user):
+头像       upicture【varchar(20)】
+用户名(主键)  uname【varchar(20)】
+登录密码 upassword【varchar(20)】
+性别       usex【varchar(2)】
+真实姓名 name【varchar(20)】
+手机号    uphone【char(11)】
+门牌号    unumber【varchar(30)】
+父亲姓名  father【varchar(20)】
+登录状态  ustate【boolean】
+
+
+公告管理(announce):
+序号(主键)     ano【int】
+标题              aname【varchar(50)】
+日期              adate【char(20)】
+内容              acontent【text】
+内容图片        apicture【char(200)】
+
+
+报修信息管理(repair):
+序号              rno【int】
+真实姓名       name【varchar(20)】
+地址             unumber【varchar(30)】
+手机号          uphone【char(11)】
+报修内容       rcontent【text】
+报修图片       rpicture【varchar(20)】
+是否分配工人 allocate【varchar(5)】
+工人信息       worker【text】
+上门时间       rtime【char(20)】
+状态              rstate【varchar(5)】
+
+
+反馈管理(feedback):
+头像            upicture【varchar(20)】
+用户名         uname【varchar(20)】
+真实姓名      name【varchar(20)】
+手机号         uphone【char(11)】
+反馈内容      fcontent【text】
+反馈时间       fdate【char(20)】
+
+
+
+闲置信息管理(ldle):
+头像            upicture【varchar(20)】
+用户名         uname【varchar(20)】
+真实姓名      name【varchar(20)】
+手机号         uphone【char(11)】
+发布时间      ldate【char(20)】
+发布内容      lcontent【text】
+物品图片      lpicture【varchar(20)】
+物品名称      lname【varchar(10)】
+物品价钱      lprice【float】
+
+
+管理员信息(manager):
+头像            mpicture【varchar(20)】
+姓名            mname【varchar(20)】
+登录密码      mpassword【varchar(20)】
+工号(主键)    mno【varchar(10)】
+性别            msex【char(2)】
+年龄            mage【int】
+身份证号      mid【char(18)】
+手机号         mphone【char(11)】
+登录状态      mstate【boolean】
+
+
+交通违章（traffic）
+车牌号码(主键) plate【varchar(10)】
+车身架号后六位 body【char(6)】
+发动机号       engine【varchar(10)】
+状态             tstate【varchar(5)】
+罚款             fine【float】
+扣分             point【int】
+违章时间      ttime【char(20)】
+违章地点      tplace【varchar(50)】
+违章内容      tcontent【text】
+
+
+生活缴费（payment）
+上次缴费金额	  addmoney【float】
+户号              unumber【varchar(30)】
+户名               name【varchar(20)】
+电话               uphone【char(11)】
+小区名称        cellname【varchar(10)】
+缴费单位        punit【varchar(20)】
+缴费类型        ptype【varchar(10)】
+当前余额        balance【float】
+欠费金额        arrearage【float】
+支付密码        ppassword【varchar(10)】
+充值时间        ptime【char(20)】
+
+
+
+广场（plaza）
+头像          picture【varchar(20)】
+用户名       name【varchar(20)】
+手机号       uphone【char(11)】
+发布内容    plcontent【text】
+发布图片    plpicture【varchar(20)】
+发布时间    pltime【char(20)】
+标签          pltag【varchar(20)】
+位置          pllocate【varchar(20)】
+点赞数       plike【int】
+阅读量       pread【char(10)】
+评论          comment【text】
+评论数       commentno【int】
+关注          follow【varchar(5)】
+
+
+
+
+
+
+
