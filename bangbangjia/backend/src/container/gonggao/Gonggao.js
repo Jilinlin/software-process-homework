@@ -10,20 +10,21 @@ export default class Gonggao extends Component {
             num:[1,2,3,4,5]
         }
     }
-    del(idx){
+    del(idx,ano){
         let data =[...this.state.data];
         data.splice(idx,1);
         this.setState({
             data
         })
         idx=idx+1;
+        console.log(idx,ano);
         fetch("http://localhost:4000/backgonggao_del",{
             method:"POST",
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify({"idx":idx})
+            body:JSON.stringify({"ano":ano})
         })
         .then((res)=>res.text())
         .then((res)=>{
@@ -140,7 +141,7 @@ export default class Gonggao extends Component {
                                         <li style={{width:155}}>{item.aname}</li>
                                         <li style={{width:115}}>{item.adate.slice(0,11)}</li>
                                         <li style={{width:150,lineHeight:2,marginLeft:20,marginRight:10}}>{item.acontent.slice(0,17)}...</li>
-                                        <li><button onClick={()=>this.del(idx)}>删除</button></li>
+                                        <li><button onClick={()=>this.del(idx,item.ano)}>删除</button></li>
                                     </ul>
                                 </li>
                             })

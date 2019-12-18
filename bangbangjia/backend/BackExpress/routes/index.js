@@ -153,11 +153,11 @@ router.post('/backgonggao_post', function(req, res, next) {
 });
 // 后端公告删除
 router.post('/backgonggao_del', function(req, res, next) {
-  var idx=req.body.idx;
-  console.log(idx);
+  var ano=req.body.ano;
+  console.log(ano);
   var con=mysql.createConnection(dbconfig);// 创建连接
   con.connect();
-  con.query("delete from announce where ano=?",[idx],function(err,result) {
+  con.query("delete from announce where ano=?",[ano],function(err,result) {
     if(err){
       console.log(err);
     }else{
@@ -250,7 +250,7 @@ router.post('/backyezhu_ser', function(req, res, next) {
   console.log(message);
   var con=mysql.createConnection(dbconfig);// 创建连接
   con.connect();
-  con.query("select * from user where uname=?",[message],function(err,result) {
+  con.query("select * from user where uname=? or uphone=?",[message,message],function(err,result) {
     if(err){
       console.log(err);
     }else{
