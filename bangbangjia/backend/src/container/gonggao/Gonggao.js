@@ -38,17 +38,18 @@ export default class Gonggao extends Component {
             .then((res)=>res.json())
             .then((res)=>{
                 var i;
-                for(i=0;i<res.length;i++){
+                var j=0;
+                let theData=[];
+                for(i=0;i<res.length;i++){   
                     if(res[i].aname.indexOf(message)!=-1){
-                        let theData=[];
-                        theData.push(res[i]);
+                        theData[j++]=res[i];
                         this.setState({
                             data:theData
                         })
-                        break;
                     }
                 }
-                if(i==res.length){
+                console.log(this.state.data);
+                if(this.state.data==[]){
                     alert("未找到包含这个内容的公告");
                 }
             })
