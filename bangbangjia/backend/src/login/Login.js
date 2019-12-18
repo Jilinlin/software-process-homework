@@ -121,13 +121,14 @@ export default class Login extends Component {
                                     placeholder="请输入用户名"
                                     type="text"
                                     onBlur={this.getImg}
+                                    defaultValue={this.state.username}
                                 />
                             </div>
                         </div>
                         <div className="login_bottom_top">
                             <div className="login_bottom_input">
                                 <div className="login_bottom_input_word">密码</div>
-                                <input type='password' name='password'/>
+                                <input type='password' name='password' defaultValue={this.state.password}/>
                                 <div className="login_rp">
                                     <i style={{color:"#0195f8",marginRight:"5px"}} onClick={this.changeIcon} className="iconfont icon-not_Selected-copy"></i>记住密码
                                 </div>
