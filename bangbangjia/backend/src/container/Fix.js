@@ -5,7 +5,7 @@ export default class Yezhu extends Component {
         super(props);
         this.state={
             data:[],
-            num:[1,2,3,4,5]
+            num:[1,2,3,4,5],
         }
     }
     del(idx,rno){
@@ -62,6 +62,14 @@ export default class Yezhu extends Component {
     }
 
     changesel=(e,rno)=>{
+        let data =this.state.data;
+        data[rno-1].allocate=e.target.value;
+        // console.log(data[rno].allocate);
+        // console.log(e.target.value);
+        this.setState({
+            data
+        })
+        // console.log(data);
         let fixsel=e.target.value;
         // console.log(fixsel,rno);
         fetch("http://localhost:4000/backweixiu_fenpei",{
@@ -76,13 +84,21 @@ export default class Yezhu extends Component {
         .then(res=>{
             console.log(res);
             if(res=="update success"){
-                alert("修改成功");
+                console.log("修改成功");
             }else{
-                alert("修改失败");
+                console.log("修改失败");
             }
         })
     }
     changesel2=(e,rno)=>{
+        let data =this.state.data;
+        data[rno-1].rstate=e.target.value;
+        // console.log(data[rno].allocate);
+        // console.log(e.target.value);
+        this.setState({
+            data
+        })
+        // console.log(data);
         let fixsel=e.target.value;
         // console.log(fixsel,rno);
         fetch("http://localhost:4000/backweixiu_jiejue",{
@@ -97,9 +113,9 @@ export default class Yezhu extends Component {
         .then(res=>{
             console.log(res);
             if(res=="update success"){
-                alert("修改成功");
+                console.log("修改成功");
             }else{
-                alert("修改失败");
+                console.log("修改失败");
             }
         })
     }
