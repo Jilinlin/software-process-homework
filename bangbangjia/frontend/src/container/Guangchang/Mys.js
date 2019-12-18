@@ -7,7 +7,8 @@ export default class Mys extends Component {
         super(props);
         this.state={
             back:false,
-            data:[]
+            data:[],
+            pinglun:true
         }
     }
     componentDidMount(){
