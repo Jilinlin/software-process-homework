@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom';
 import { NavBar, Icon } from 'antd-mobile';
 
-export default class Mine extends Component {
+export default class Mys extends Component {
     constructor(props){
         super(props);
         this.state={

@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom"
 import { NavBar, Icon,ListView} from 'antd-mobile';
 import ReactDOM from 'react-dom'
  
-export default class Weixiu extends Component {
+export default class Xianzhi extends Component {
 
     constructor(props) {
         super(props);
@@ -43,7 +43,7 @@ export default class Weixiu extends Component {
         } 
         return (
             // #F4F3F3
-            <div>
+            <div style={{background:"#F4F3F3"}}>
                 {/* 闲置信息标题 */}
                 <NavBar
                     mode="light"
