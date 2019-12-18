@@ -59,7 +59,7 @@ export default class BreakTraffic extends Component {
                                 return <li key={idx}>
                                     <div style={{width:'90%',marginLeft:'5%',height:'40px',fontSize:25,fontWeight:'bold'}}>{item.plate}</div>
                                     <div style={{width:'100%',height:'40px',backgroundColor:'white',float:'left'}}>
-                                        <p style={{float:'left',fontSize:20,color:'brown',marginLeft:'5%',lineHeight:'40px'}}>您有{idx+1}条违章记录</p>
+                                        <p style={{float:'left',fontSize:20,color:'brown',marginLeft:'5%',lineHeight:'40px'}}>您有{this.state.data.length}条违章记录</p>
                                         <p style={{float:'right',fontSize:17,lineHeight:'40px',marginRight:'5%'}}>{item.ttime}</p>
                                     </div>
                                     <div  style={{width:'100%',height:'40px',float:'left'}}>
