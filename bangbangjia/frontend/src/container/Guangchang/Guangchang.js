@@ -50,7 +50,7 @@ export default class Guangchang extends Component {
         })
         
     }
-    dianzan=(uphone,plike)=>{
+    dianzan=(uphone,plike,pltime)=>{
         console.log(uphone);
         fetch("http://localhost:8000/dianzan",{
             method:"POST",
@@ -58,7 +58,7 @@ export default class Guangchang extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify({"uphone":uphone,"plike":plike})
+            body:JSON.stringify({"uphone":uphone,"plike":plike,"pltime":pltime})
         })
         .then((res)=>res.json())
         .then((res)=>{
@@ -120,7 +120,7 @@ export default class Guangchang extends Component {
                                     }
                                 </div>
                                 <footer>
-                                    <div className="iconfont icon-dianzan" onClick={()=>this.dianzan(item.uphone,item.plike)} style={{marginRight:"120px",marginLeft:"70px",marginTop:"10px"}}><span>{item.plike}</span></div>
+                                    <div className="iconfont icon-dianzan" onClick={()=>this.dianzan(item.uphone,item.plike,item.pltime)} style={{marginRight:"120px",marginLeft:"70px",marginTop:"10px"}}><span>{item.plike}</span></div>
                                     <div className="iconfont icon-pinglun" onClick={this.pinglun} style={{marginTop:"10px"}}><span>{item.commentno}</span></div>
                                 </footer>
                                 {/* 评论 */}

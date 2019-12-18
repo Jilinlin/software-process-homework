@@ -58,23 +58,24 @@ export default class Tousu extends Component {
                 <ul>
                         {
                             this.state.data.map((item,idx)=>{
-                                return <li key={idx}>
+                                return <li key={idx} style={{borderBottom:"1.5px solid #ab1602"}}>
                                     <Item multipleLine onClick={() => {}}>
-                                        <span style={{fontSize:19,fontWeight:'bold'}}> {item.uname} </span>
-                                        <Brief style={{marginTop:'5%'}}> {item.fcontent}</Brief>
+                                        <span style={{fontSize:22,fontWeight:'bold'}}> {item.uname} </span>
+                                        <Brief style={{marginTop:'3%',fontSize:17}}> {item.fcontent}</Brief>
+                                        <Brief style={{marginTop:'3%',float:"right",fontSize:15}}> {item.fdate}</Brief>
                                     </Item>
                                 </li>
                             })}
                 </ul>
                 </List>   
                 {/* 添加投诉信息内容 */}
-                <NavBar
+                {/* <NavBar
                     mode="light"
                     style={{background:"#f2f2f2",lineHeight:"60px",width:'100%',position:'fixed',bottom:'0'}}
                     // ,position:'fixed',bottom:'0'
-                >
-                    <i onClick={()=>{this.doNext()}} style={{fontSize:50,color:'#ab1602'}} className='iconfont icon-jiahao'></i>
-                </NavBar>             
+                > */}
+                    <i onClick={()=>{this.doNext()}} style={{fontSize:50,color:'#ab1602',marginLeft:"43%"}} className='iconfont icon-jiahao'></i>
+                {/* </NavBar>              */}
             </div>
         )
     }

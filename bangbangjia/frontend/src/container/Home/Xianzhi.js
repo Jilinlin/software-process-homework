@@ -70,13 +70,13 @@ export default class Xianzhi extends Component {
                     </ul>
                 </div>
                 {/* 添加闲置信息内容 */}
-                <NavBar
+                {/* <NavBar
                     mode="light"
-                    style={{background:"#f2f2f2",lineHeight:"60px",width:'100%',position:'fixed',bottom:'0'}}
+                    style={{height:"50px",width:'100%',position:'fixed',bottom:'0'}}
                     // ,position:'fixed',bottom:'0'
-                >
-                    <i onClick={()=>{this.doNext()}} style={{fontSize:50,color:'#ab1602'}} className='iconfont icon-jiahao'></i>
-                </NavBar>       
+                > */}
+                    <i onClick={()=>{this.doNext()}} style={{fontSize:50,color:'#ab1602',marginLeft:"43%"}} className='iconfont icon-jiahao'></i>
+                {/* </NavBar>        */}
             </div>
         )
     }

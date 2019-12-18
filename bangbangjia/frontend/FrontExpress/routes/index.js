@@ -708,11 +708,12 @@ router.post('/jiaofeipay', function(req, res, next) {
 // 广场点赞
 router.post('/dianzan', function(req, res, next) {
   var uphone=req.body.uphone;
+  var pltime=req.body.pltime;
   var plike=parseInt(req.body.plike);
   var like=plike+1;
   var con=mysql.createConnection(dbconfig);// 创建连接
   con.connect();
-  con.query("update plaza set plike=? where uphone=?",[like,uphone],function(err,result) {
+  con.query("update plaza set plike=? where uphone=? and pltime=?",[like,uphone,pltime],function(err,result) {
     if(err){
       console.log(err);
     }else{
@@ -724,6 +725,25 @@ router.post('/dianzan', function(req, res, next) {
       console.log(err);
     }else{
       res.send(result);
+    }
+  })
+});
+// 违章查询
+router.post('/weizhang', function(req, res, next) {
+  var check=req.body;
+  console.log(check);
+  var con=mysql.createConnection(dbconfig);// 创建连接
+  con.connect();
+  con.query("select * from traffic where plate=? and body=? and engine=?",[check.check1,check.check2,check.check3],function(err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      // console.log(result);
+      if(result){
+        res.send(result)
+      }else{
+        res.send("error")
+      }
     }
   })
 });

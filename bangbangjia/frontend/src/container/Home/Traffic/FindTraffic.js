@@ -40,7 +40,12 @@ export default class FindTraffic extends Component {
                 this.state={
                     check:false
                 }
+                this.state = {
+        
+                    sValue: ['冀'],
+                }
     }
+    
     back=(e)=>{
         e.preventDefault();
         this.setState({
@@ -57,12 +62,9 @@ export default class FindTraffic extends Component {
                 this.setState({
                      check :true
                })
+            // console.log(this.state.sValue+check1,check2,check3);
             }
     }
-        state = {
-        
-            sValue: ['冀'],
-        }
         onClick = () => {
             setTimeout(() => {
             this.setState({
@@ -86,7 +88,10 @@ export default class FindTraffic extends Component {
         }
         if(this.state.check){
             console.log(this.state.check)
-            return  <Redirect to="/breaktraffic"/>
+            let check1=this.state.sValue+document.querySelector("input[id=name1]").value;
+            let check2=document.querySelector("input[id=name2]").value;
+            let check3=document.querySelector("input[id=name3]").value;
+            return  <Redirect to={{pathname:"/breaktraffic",state:{"check1":check1,"check2":check2,"check3":check3}}}/>
         }
         return (
             <div style={{width:'100%',height:812,backgroundColor:'#eee'}}>
@@ -106,7 +111,7 @@ export default class FindTraffic extends Component {
               <form style={{width:'100%',height:'260px'}} onSubmit={this.check}>
                   <div style={{width:'100%',height:'50px',backgroundColor:'white'}}>
                       <div style={{width:'30%',fontSize:22,marginLeft:'5%',paddingTop:'10px',fontWeight:'bold',float:'left'}}>车牌号码</div>
-                      <input type='text' id='name1'placeholder='车牌号码' style={{width:'22%',height:50,float:'right',border:'0',fontSize:18}}></input>
+                      <input type='text' id='name1' placeholder='车牌号码' style={{width:'22%',height:50,float:'right',border:'0',fontSize:18}}></input>
                       <div style={{width:'20%',height:50,float:'right'}}>
                        <List className="picker-list">
                             <Picker

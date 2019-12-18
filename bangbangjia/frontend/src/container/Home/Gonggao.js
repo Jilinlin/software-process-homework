@@ -50,11 +50,11 @@ export default class Gonggao extends Component {
                         {
                             this.state.data.map((item,idx)=>{
                                 return <li key={idx}>
-                                    <Item multipleLine onClick={() => {}} style={{borderBottom:'1px solid #b51804'}} >
-                                        <span style={{fontSize:19,fontWeight:'bold'}}> {item.aname} </span>
-                                        <Brief> {item.acontent} </Brief>
-                                        <Brief style={{fontSize:10,marginLeft:'75%'}}> {item.adate} </Brief>
-                                    </Item>
+                                    <div onClick={() => {}} style={{borderBottom:'1px solid #b51804',padding:"10px"}} >
+                                        <span style={{fontSize:22,fontWeight:'bold'}}> {item.aname} </span>
+                                        <div style={{width:"95%",height:"80px",fontSize:15,color:"black",marginTop:"10px"}}> {item.acontent} </div>
+                                        <div style={{fontSize:15,marginLeft:'75%'}}> {item.adate} </div>
+                                    </div>
                                 </li>
                             })
                         }

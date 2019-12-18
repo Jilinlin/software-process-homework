@@ -46,6 +46,17 @@ export default class Mys extends Component {
             console.log(res);
         })
     }
+    pinglun=()=>{
+        if(this.state.pinglun==true){
+            this.setState({
+                pinglun:false
+            })
+        }else if(this.state.pinglun==false){
+            this.setState({
+                pinglun:true
+            })
+        }
+    }
     mine=()=>{
         this.setState({
             back:true
@@ -91,9 +102,21 @@ export default class Mys extends Component {
                                     }
                                 </div>
                                 <footer>
-                                    <div className="iconfont icon-dianzan"><span>{item.like}</span></div>
-                                    <div className="iconfont icon-pinglun"><span>{item.commentno}</span></div>
+                                    <div className="iconfont icon-dianzan"><span>{item.plike}</span></div>
+                                    <div className="iconfont icon-pinglun" onClick={this.pinglun}><span>{item.commentno}</span></div>
                                 </footer>
+                                {/* 评论 */}
+                                <form style={{borderTop:"1px solid #eeeeee",fontSize:"15px",margin:"0 10px 0 10px",width:"355px",height:"40px",lineHeight:"40px",display:this.state.pinglun?"none":"block"}}>
+                                    {
+                                        function(){
+                                            if(item.plpicture){
+                                               return <img style={{width:"30px",height:"30px",borderRadius:"15px",marginRight:"5px"}} src={require(`../../img/`+item.plpicture)}/>
+                                            }
+                                        }()
+                                    }
+                                    {item.comment}
+                                    <span style={{float:"right"}}>2019/12/19 10:27:33</span>
+                                </form>
                             </li>
                             })
                         }
