@@ -138,7 +138,7 @@ export default class Gonggao extends Component {
                                         <li style={{width:50}}>{item.ano}</li>
                                         <li style={{width:155}}>{item.aname}</li>
                                         <li style={{width:115}}>{item.adate}</li>
-                                        <li style={{width:150,lineHeight:2,marginLeft:20,marginRight:10}}>{item.acontent}</li>
+                                        <li style={{width:150,lineHeight:2,marginLeft:20,marginRight:10}}>{item.acontent.slice(0,17)}...</li>
                                         <li><button onClick={()=>this.del(idx)}>删除</button></li>
                                     </ul>
                                 </li>
